@@ -1,0 +1,3 @@
+[submodule "src/app/ChartingLib"]
+	path = src/app/ChartingLib
+	url = https://github.com/Prabal-I2v/ChartingLib.git
