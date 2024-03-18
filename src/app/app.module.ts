@@ -12,7 +12,8 @@ import { ChartinglibModule } from './ChartingLib/chartinglib/chartinglib.module'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartinglibModule
+    ChartinglibModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
