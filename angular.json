@@ -28,6 +28,10 @@
               "src/assets"
             ],
             "styles": [
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css",
+                "inject": true
+              },
               "src/styles.scss"
             ],
             "scripts": []
