@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChartinglibModule } from './ChartingLib/chartinglib/chartinglib.module';
+import { DashBoardModule } from './dash-board/dash-board.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ChartinglibModule } from './ChartingLib/chartinglib/chartinglib.module'
     BrowserModule,
     AppRoutingModule,
     ChartinglibModule,
+    DashBoardModule
     
   ],
   providers: [],
