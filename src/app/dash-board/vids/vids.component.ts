@@ -2,16 +2,6 @@ import { Component } from '@angular/core';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
 import { data } from 'src/app/ChartingLib/chartinglib/kendo-chart/commit-data';
 
-const dayLabels: { [index: number]: string } = {
-  0: "Sun",
-  1: "Mon",
-  2: "Tue",
-  3: "Wed",
-  4: "Thur",
-  5: "Fri",
-  6:  "Sat"
-};
-
 @Component({
   selector: 'app-vids',
   templateUrl: './vids.component.html',
@@ -25,10 +15,7 @@ export class VidsComponent {
     "Server": ["CPU1", "CPU2", "GPU1", "GPU2"]
   }
 
-  public commitData = data();
-  public yAxisLabelContent = (e: { value: string }): string => {
-    return dayLabels[e.value] || "";
-  };
+  
   public barandLineData = [200, 450, 300, 125, 200, 450, 300, 125, 200, 450, 300, 125]
   public barandLineCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   public pieData = [
@@ -39,16 +26,27 @@ export class VidsComponent {
     { category: "65+", value: 0.0933 },
   ];
 
-  public labelContent(args: any): string {
-    return `${args.dataItem.category} years old`;
-  }
+  public stackedColumnChartData = [[120, 67, 231, 196], [45, 124, 189, 143], [87, 154, 210, 215]]
+
+  public HeatMapData = data();
+  public heatMapCategories: { [index: number]: string } = {
+    0: "Sun",
+    1: "Mon",
+    2: "Tue",
+    3: "Wed",
+    4: "Thur",
+    5: "Fri",
+    6: "Sat"
+  };
+  
+ 
 
   onDaysFilterOutput(event) {
-
+      console.log("Date value : ", event);
   }
 
   onCustomFilterOutput(event) {
-
+    console.log("Filter value : ", event);
   }
 
 }
