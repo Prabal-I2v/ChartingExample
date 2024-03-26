@@ -1,38 +1,92 @@
 <div>
-  <kendo-tilelayout  [rowHeight]="855"  [style.Width]="855" [resizable]="true" reorderable="true">
-    <kendo-tilelayout-item reorderable="true">
+  <kendo-tilelayout autoFlow="none" [columns]="10" [gap]="10" [reorderable]="true" [resizable]="true">
+    <kendo-tilelayout-item title="Bar Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
-        <i2v-charts style="display: flex;" heading="Stopped Vehicles" subHeading="in lakhs"
-          [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
-          (customFilterOutput)="onCustomFilterOutput($event)">
-          <kendo-chart>
-            <kendo-chart-title text="Bar Chart"></kendo-chart-title>
-            <kendo-chart-category-axis>
-              <kendo-chart-category-axis-item [categories]="barandLineCategories" [title]="{ text: 'Months' }">
-              </kendo-chart-category-axis-item>
-            </kendo-chart-category-axis>
-            <kendo-chart-series>
-              <kendo-chart-series-item type="column" [gap]="2" [spacing]="0.25" [data]="barandLineData">
-              </kendo-chart-series-item>
-            </kendo-chart-series>
-          </kendo-chart>
-        </i2v-charts>
+        <i2v-bar-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartCategories]="barandLineCategories" [chartData]="barandLineData">
+        </i2v-bar-chart>
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
-    <kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Pie Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-pie-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartData]="pieData">
+        </i2v-pie-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Column Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-column-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartCategories]="barandLineCategories" [chartData]="barandLineData">
+        </i2v-column-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Stacked Column Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-stackedcolumn-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartData]="stackedColumnChartData">
+        </i2v-stackedcolumn-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Stacked Bar Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-stackedcolumn-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartData]="stackedColumnChartData">
+        </i2v-stackedcolumn-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Heat Map" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-heatmap-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartCategories]="heatMapCategories" [chartData]="HeatMapData">
+        </i2v-heatmap-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Line Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-line-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartCategories]="barandLineCategories" [chartData]="barandLineData">
+        </i2v-line-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Line Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+        <i2v-area-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartCategories]="stackedColumnChartData" [chartData]="stackedColumnChartData">
+        </i2v-area-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
+
+    <!-- <kendo-tilelayout-item title="Bar Chart" [col]="2">
       <kendo-tilelayout-item-body>
         <i2v-charts style="display: flex;" heading="Wrong way vehicles" subHeading="in lakhs"
           [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
           (customFilterOutput)="onCustomFilterOutput($event)">
           <kendo-chart>
-            <kendo-chart-title text="Bar Chart"></kendo-chart-title>
+            <kendo-chart-title text=""></kendo-chart-title>
             <kendo-chart-category-axis>
               <kendo-chart-category-axis-item [categories]="barandLineCategories" [title]="{ text: 'Months' }">
               </kendo-chart-category-axis-item>
             </kendo-chart-category-axis>
             <kendo-chart-series>
-              <kendo-chart-series-item type="column" [gap]="2" [spacing]="0.25" [data]="barandLineData">
+              <kendo-chart-series-item type="bar" [gap]="2" [spacing]="0.25" [data]="barandLineData">
               </kendo-chart-series-item>
             </kendo-chart-series>
           </kendo-chart>
@@ -40,7 +94,8 @@
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
-    <kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Title 1" [col]="1">
       <kendo-tilelayout-item-body>
         <i2v-charts style="display: flex;" heading="Abandoned Object" subHeading="in thousand"
           [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
@@ -63,7 +118,8 @@
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
-    <kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Title 1" [col]="1">
       <kendo-tilelayout-item-body>
         <i2v-charts style="display: flex;" heading="Total no. of vehicles" subHeading="in lakhs"
           [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
@@ -80,7 +136,8 @@
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
-    <kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Title 1" [col]="1">
       <kendo-tilelayout-item-body>
         <i2v-charts style="display: flex;" heading="Abandoned Object" subHeading="in thousand"
           [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
@@ -108,7 +165,8 @@
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
-    <kendo-tilelayout-item>
+
+    <kendo-tilelayout-item title="Title 1" [col]="1">
       <kendo-tilelayout-item-body>
         <i2v-charts style="display: flex;" heading="Stopped Vehicles" subHeading="in lakhs"
           [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
@@ -127,5 +185,26 @@
         </i2v-charts>
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
+
+
+    <kendo-tilelayout-item title="Title 1" [col]="1">
+      <kendo-tilelayout-item-body>
+        <i2v-charts style="display: flex;" heading="Stopped Vehicles" subHeading="in lakhs"
+          [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
+          (customFilterOutput)="onCustomFilterOutput($event)">
+          <kendo-chart>
+            <kendo-chart-series>
+              <kendo-chart-series-item type="column" [stack]="true" [data]="[120, 67, 231, 196]">
+              </kendo-chart-series-item>
+              <kendo-chart-series-item type="column" [data]="[45, 124, 189, 143]">
+              </kendo-chart-series-item>
+              <kendo-chart-series-item type="column" [data]="[87, 154, 210, 215]">
+              </kendo-chart-series-item>
+            </kendo-chart-series>
+          </kendo-chart>
+        </i2v-charts>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item> -->
   </kendo-tilelayout>
+
 </div>
