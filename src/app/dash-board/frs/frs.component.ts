@@ -39,7 +39,7 @@ export class FrsComponent implements OnInit {
     return `${args.dataItem.category} ${args.dataItem.value *100}%`;
   }
   //gauge
-  public gaugevalue = 30;
+  public gaugevalue ="30";
 
   ngOnInit(): void {
     this.gridView = this.gridData;

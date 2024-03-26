@@ -67,7 +67,7 @@
   <kendo-grid [kendoGridBinding]="gridView" kendoGridSelectBy="id" [(selectedKeys)]="mySelection" [pageSize]="10"
     [pageable]="true" [sortable]="true"  [reorderable]="true" [resizable]="true"
     [columnMenu]="{ filter: true }">
-      <kendo-grid-column field="name" title="name" >
+      <kendo-grid-column field="name" title="Name" >
         <!-- <ng-template kendoGridCellTemplate let-dataItem style="display:flex;flex-direction:row;gap:10px;"  >
           <img [src]="dataItem.image" width="32" height="32" style="border-radius: 50%;" >
           <div class="customer-name">{{ dataItem.name }}</div>
@@ -78,7 +78,7 @@
         </ng-template>
       </kendo-grid-column>
 
-        <kendo-grid-column field="gender" title="gender" [width]="100" [class]="{ 'text-center': true }"
+        <kendo-grid-column field="gender" title="Gender" [width]="100" [class]="{ 'text-center': true }"
         [resizable]="false" filter="boolean">
         <ng-template kendoGridCellTemplate let-dataItem>
         <kendo-badge-container style="display: inline;border: 1px solid ;border-radius: 4px;padding: 4px;border-color:#E5E9EC;">
@@ -89,9 +89,9 @@
         </ng-template>
         </kendo-grid-column>
 
-      <kendo-grid-column field="label" title="label" >
+      <kendo-grid-column field="label" title="Label" >
       </kendo-grid-column>
-      <kendo-grid-column field="recurrences" title="recurrences">
+      <kendo-grid-column field="recurrences" title="Recurrences">
       </kendo-grid-column>
 
     <kendo-grid-pdf fileName="Employees.pdf" [repeatHeaders]="true"></kendo-grid-pdf>
@@ -102,137 +102,123 @@
 </kendo-tilelayout-item>
 </kendo-tilelayout>
   <!-- Employees attendance -->
-
-  <!-- <kendo-tilelayout-item>
-    <kendo-tilelayout-item-body>
-      <i2v-charts style="display: flex;" heading="Employees attendance"
+  <kendo-tilelayout  [resizable]="true" reorderable="true" style="width: 50%;padding: 10px;">
+    <kendo-tilelayout-item reorderable="true"  style="width: 100%;">
+      <kendo-tilelayout-item-body style="width: 100%;">
+      <i2v-charts style="display: flex;" heading="Top 10 frequently person seen"
         [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
-        (customFilterOutput)="onCustomFilterOutput($event)"> -->
-  <!-- <kendo-grid [kendoGridBinding]="gridView" kendoGridSelectBy="id" [(selectedKeys)]="mySelection" [pageSize]="20"
-    [pageable]="true" [sortable]="true" [groupable]="true" [reorderable]="true" [resizable]="true" [height]="1000"
+        (customFilterOutput)="onCustomFilterOutput($event)">
+  <kendo-grid [kendoGridBinding]="gridView" kendoGridSelectBy="id" [(selectedKeys)]="mySelection" [pageSize]="10"
+    [pageable]="true" [sortable]="true"  [reorderable]="true" [resizable]="true"
     [columnMenu]="{ filter: true }">
-    <ng-template kendoGridToolbarTemplate>
-      <kendo-textbox [style.width.px]="165" placeholder="Search in all columns..."
-        (valueChange)="onFilter($event)"></kendo-textbox>
-      <kendo-grid-spacer></kendo-grid-spacer>
-      <button kendoGridExcelCommand type="button" [svgIcon]="excelSVG">
-        Export to Excel
-      </button>
-      <button kendoGridPDFCommand [svgIcon]="pdfSVG">Export to PDF</button>
-    </ng-template>
-    <kendo-grid-checkbox-column [width]="45" [headerClass]="{ 'text-center': true }" [class]="{ 'text-center': true }"
-      [resizable]="false" [columnMenu]="false" [showSelectAll]="true"></kendo-grid-checkbox-column>
+      <kendo-grid-column field="name" title="Name" >
+        <!-- <ng-template kendoGridCellTemplate let-dataItem style="display:flex;flex-direction:row;gap:10px;"  >
+          <img [src]="dataItem.image" width="32" height="32" style="border-radius: 50%;" >
+          <div class="customer-name">{{ dataItem.name }}</div>
+        </ng-template> -->
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <div class="customer-photo" [ngStyle]="{ 'background-image': photoURL(dataItem.image) }"></div>
+          <div class="customer-name">{{ dataItem.name }}</div>
+        </ng-template>
+      </kendo-grid-column>
 
-      <kendo-grid-column field="Name" title="Name" [width]="220">
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <div class="customer-photo" [ngStyle]="{ 'background-image': photoURL(dataItem) }"></div>
-          <div class="customer-name">{{ dataItem.full_name }}</div>
-        </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column field="Gender" title="Gender" [width]="220">
-      </kendo-grid-column>
-      <kendo-grid-column field="Label" title="Label" [width]="100" [class]="{ 'text-center': true }"
-        [resizable]="false">
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <img class="flag" [src]="flagURL(dataItem)" [width]="30" />
-        </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column field="is_online" title="Status" [width]="100" [class]="{ 'text-center': true }"
+        <kendo-grid-column field="clock_in_time" title="Clock in time" [width]="100" [class]="{ 'text-center': true }"
         [resizable]="false" filter="boolean">
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <kendo-badge-container style="display: inline;">
-            <kendo-badge size="large" [themeColor]="dataItem.is_online ? 'success' : 'error'">
-              {{ dataItem.is_online ? "Online" : "Offline" }}
-            </kendo-badge>
-          </kendo-badge-container>
+        </kendo-grid-column>
+
+      <kendo-grid-column field="clock_in_percentage" title="Clock in %" >
+      </kendo-grid-column>
+      <kendo-grid-column field="last_5_days" title="Last 5 days">
+        <ng-template let-dataItem  kendoGridCellTemplate >
+
+            <div class="attendence_icon" [ngStyle]="{ 'background-image': dataItem.last_5_days[0]?photoURL('assets/images/check.png'):photoURL('assets/images/image.png') }">
+          </div>
+          <div class="attendence_icon" [ngStyle]="{ 'background-image': dataItem.last_5_days[1]?photoURL('assets/images/check.png'):photoURL('assets/images/image.png') }">
+          </div>
+          <div class="attendence_icon" [ngStyle]="{ 'background-image': dataItem.last_5_days[2]?photoURL('assets/images/check.png'):photoURL('assets/images/image.png') }">
+          </div>
+          <div class="attendence_icon" [ngStyle]="{ 'background-image': dataItem.last_5_days[3]?photoURL('assets/images/check.png'):photoURL('assets/images/image.png') }">
+          </div>
+          <div class="attendence_icon" [ngStyle]="{ 'background-image': dataItem.last_5_days[4]?photoURL('assets/images/check.png'):photoURL('assets/images/image.png') }">
+          </div>
+
         </ng-template>
       </kendo-grid-column>
 
-      <kendo-grid-column field="rating" title="Rating" [width]="110" [resizable]="false" filter="numeric">
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <kendo-rating [value]="dataItem.rating" [max]="5"></kendo-rating>
-        </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column field="target" title="Engagement" [width]="230" [resizable]="false" filter="numeric">
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <kendo-sparkline type="bar" [data]="dataItem.target" [tooltip]="{ visible: false }"
-            [seriesDefaults]="{
-          labels: { background: 'none', visible: true, format: '{0}%' }
-        }">
-            <kendo-chart-area [opacity]="0" [width]="200"></kendo-chart-area>
-            <kendo-chart-value-axis>
-              <kendo-chart-value-axis-item [min]="0" [max]="130">
-              </kendo-chart-value-axis-item>
-            </kendo-chart-value-axis>
-          </kendo-sparkline>
-        </ng-template>
-      </kendo-grid-column>
-      <kendo-grid-column field="budget" title="Budget" [width]="100" filter="numeric">
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <span [ngClass]="{ 'red text-bold': dataItem.budget < 0 }">{{
-            dataItem.budget | currency
-            }}</span>
-        </ng-template>
-      </kendo-grid-column>
+    <kendo-grid-pdf fileName="EmployeesAttendence.pdf" [repeatHeaders]="true"></kendo-grid-pdf>
+    <kendo-grid-excel fileName="EmployeesAttendence.xlsx"></kendo-grid-excel>
+  </kendo-grid>
+  </i2v-charts>
+</kendo-tilelayout-item-body>
+</kendo-tilelayout-item>
+</kendo-tilelayout>
 
-    <kendo-grid-pdf fileName="Employees.pdf" [repeatHeaders]="true"></kendo-grid-pdf>
-    <kendo-grid-excel fileName="Employees.xlsx"></kendo-grid-excel>
-  </kendo-grid> -->
-  <!-- </i2v-charts>
-  </kendo-tilelayout-item-body>
-  </kendo-tilelayout-item> -->
 
 </div>
 
 <div style="display: flex;flex-direction: row;gap:20px">
   <!-- "Customer footfall -->
-  <!-- <kendo-tilelayout-item>
+  <kendo-tilelayout  [resizable]="true" reorderable="true" style="padding: 10px">
+  <kendo-tilelayout-item>
     <kendo-tilelayout-item-body>
-      <i2v-charts style="display: flex;" heading="Customer footfall "
+      <i2v-charts style="display: flex" heading="Customer footfall "
         [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
         (customFilterOutput)="onCustomFilterOutput($event)">
-        <kendo-chart title="Pie Chart">
+        <kendo-chart [seriesColors]='["#00cc94","#c7dfdd"]'>
           <kendo-chart-legend position="right"></kendo-chart-legend>
           <kendo-chart-series>
-            <kendo-chart-series-item type="pie" [data]="customerFootfall" field="value" categoryField="category"
-              [labels]="{ visible: true, content: labelContent }">
+            <kendo-chart-series-item   type="donut" [data]="customerFootfall" field="value" categoryField="category"
+              [labels]="{ visible: false, content: labelContent }">
             </kendo-chart-series-item>
           </kendo-chart-series>
         </kendo-chart>
       </i2v-charts>
     </kendo-tilelayout-item-body>
-  </kendo-tilelayout-item> -->
+  </kendo-tilelayout-item>
+</kendo-tilelayout>
   <!-- Avg. employees’ attendance -->
-  <!-- <kendo-tilelayout-item>
+  <kendo-tilelayout  [resizable]="true" reorderable="true" style="padding: 10px">
+  <kendo-tilelayout-item>
     <kendo-tilelayout-item-body>
       <i2v-charts style="display: flex;" heading="Avg. employees’ attendance "
         [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
         (customFilterOutput)="onCustomFilterOutput($event)">
-        <kendo-chart title="Pie Chart">
+        <kendo-chart [seriesColors]='["#ff8551","#e7cea6"]' [transitions]="true">
           <kendo-chart-legend position="right"></kendo-chart-legend>
           <kendo-chart-series>
-            <kendo-chart-series-item type="pie" [data]="employeeAttenPie" field="value" categoryField="category"
-              [labels]="{ visible: true, content: labelContent }">
+            <kendo-chart-series-item type="donut" [data]="employeeAttenPie" field="value" categoryField="category"
+              [labels]="{ visible: false, content: labelContent }">
             </kendo-chart-series-item>
           </kendo-chart-series>
         </kendo-chart>
       </i2v-charts>
     </kendo-tilelayout-item-body>
-  </kendo-tilelayout-item> -->
+  </kendo-tilelayout-item>
+</kendo-tilelayout>
   <!-- Avg. visitors time -->
-  <!-- <kendo-tilelayout-item>
+  <kendo-tilelayout  [resizable]="true" reorderable="true" style="padding: 10px">
+  <kendo-tilelayout-item>
     <kendo-tilelayout-item-body>
-      <i2v-charts style="display: flex;" heading="Avg. visitors time"
-        [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
+      <i2v-charts style="display: flex;" heading="Avg. visitors time" [customFilters]="customFilter" (daysFilterOutput)="onDaysFilterOutput($event)"
         (customFilterOutput)="onCustomFilterOutput($event)">
-  <kendo-arcgauge [value]="gaugevalue">
-    <ng-template kendoArcGaugeCenterTemplate let-value="value">
-      {{ value }}
-    </ng-template>
-  </kendo-arcgauge>
+        <div style="display: flex;flex-direction:column; justify-content: center;padding: 20px;">
+          <kendo-arcgauge [value]="gaugevalue" [color]="'#d5768c'"
+            [transitions]="true">
+            <kendo-arcgauge-scale
+            rangePlaceholderColor="#f2f5fa"
+            [rangeSize]="25"
+            rangeLineCap="round" >
+            <ng-template kendoArcGaugeCenterTemplate let-value="value">
+              <h2>4 hrs 15 min</h2>
+            </ng-template>
+            </kendo-arcgauge-scale>
+          </kendo-arcgauge>
+        </div>
+
   </i2v-charts>
   </kendo-tilelayout-item-body>
-  </kendo-tilelayout-item> -->
+  </kendo-tilelayout-item>
+</kendo-tilelayout>
   </div>
 
 
