@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { DashBoardModule } from './dash-board/dash-board.module';
 import { ChartinglibModule } from './ChartingLib/chartinglib/chartinglib.module';
 
-
-
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +16,7 @@ import { ChartinglibModule } from './ChartingLib/chartinglib/chartinglib.module'
     ChartinglibModule
 
   ],
-  providers: [ ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

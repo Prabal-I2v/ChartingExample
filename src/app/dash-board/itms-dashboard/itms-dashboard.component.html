@@ -1,0 +1,177 @@
+<h1>ITMS Dashboard</h1>
+
+<div style="display: flex; flex-direction: column; gap: 20px">
+  <div style="display: flex; flex-direction: row; gap: 10px">
+
+
+    <kendo-tilelayout
+      [resizable]="true"
+      reorderable="true"
+      style="width: 100%; padding: 10px; display:flex;flex-direction: column;gap:20px"
+
+    >
+
+
+<!-- "Vehicle makes" -->
+
+<!-- wrong way vehicle -->
+
+
+<div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
+  <kendo-tilelayout-item reorderable="true" style="width: 50%">
+    <kendo-tilelayout-item-body style="width: 100%">
+      <i2v-column-chart
+        heading="Wrong way vehicles"
+        subHeading="in lakhs"
+        [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)"
+        (customFilterOutput)="onCustomFilterOutput($event)"
+        [chartCategories]="barandLineCategories"
+        [chartData]="barandLineData"
+        color="#7091f5"
+      >
+      </i2v-column-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+
+  <kendo-tilelayout-item style="width: 50%">
+    <kendo-tilelayout-item-body>
+      <app-i2v-donut-chart heading="Vehicles types" [customFilters]="customFilter"
+      (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"  [seriesColors]='["#ff9f29","#7091f5","#64ccc5","#db3e41","#aeb6c9","#ff731d"]' [position]="'right'"
+      [chartData]="customerFootfall">
+    </app-i2v-donut-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+
+</div>
+<div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
+  <!-- Total no. of violations -->
+      <kendo-tilelayout-item reorderable="true" style="width: 50%">
+        <kendo-tilelayout-item-body style="width: 100%">
+          <i2v-column-chart
+            heading="Total no. of violations"
+            subHeading="in lakhs"
+            [customFilters]="customFilter"
+            (daysFilterOutput)="onDaysFilterOutput($event)"
+            (customFilterOutput)="onCustomFilterOutput($event)"
+            [chartCategories]="wrongWayCategories"
+            [chartData]="wrongWayData"
+            color="#ff9f29"
+          >
+          </i2v-column-chart>
+        </kendo-tilelayout-item-body>
+      </kendo-tilelayout-item>
+      <!-- Violations type -->
+      <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
+        <kendo-tilelayout-item-body>
+          <i2v-bar-chart heading="Violations type" subHeading="in lakhs" [customFilters]="customFilter"
+            (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+            [chartCategories]="barandLineCategories" [chartData]="barandLineData" color="#bc7af9">
+          </i2v-bar-chart>
+        </kendo-tilelayout-item-body>
+      </kendo-tilelayout-item>
+
+</div>
+
+<div><kendo-tilelayout-item  [col]="1" colSpan="10">
+  <kendo-tilelayout-item-body>
+    <i2v-heatmap-chart heading="Traffic / violation density by" [customFilters]="customFilter"
+      (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+      [chartCategories]="heatMapCategories" [chartData]="HeatMapData" [color]="'#0286cd'">
+    </i2v-heatmap-chart>
+  </kendo-tilelayout-item-body>
+</kendo-tilelayout-item></div>
+
+    <!-- vehicles at tolls -->
+    <div style="width: 100%; display:flex;flex-direction: row;gap:20px">
+      <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
+        <kendo-tilelayout-item-body>
+          <i2v-line-chart heading="Vehicles at tolls" subHeading="in lakhs" [customFilters]="customFilter"
+            (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+            [chartCategories]="LineCategories" [chartData]="LineData">
+          </i2v-line-chart>
+        </kendo-tilelayout-item-body>
+      </kendo-tilelayout-item>
+      <!-- Average speed of vehicle -->
+      <kendo-tilelayout-item  [col]="1" colSpan="10"style="width: 50%">
+        <kendo-tilelayout-item-body>
+          <i2v-line-chart heading="Average speed of vehicle" subHeading="in lakhs" [customFilters]="customFilter"
+            (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+            [chartCategories]="LineCategories" [chartData]="LineData">
+          </i2v-line-chart>
+        </kendo-tilelayout-item-body>
+      </kendo-tilelayout-item>
+    </div>
+
+
+
+<div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
+  <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
+    <kendo-tilelayout-item-body>
+      <i2v-area-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+        [chartCategories]="stackedColumnChartData" [chartData]="stackedColumnChartData">
+      </i2v-area-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+
+  <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
+    <kendo-tilelayout-item-body>
+      <i2v-bar-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+        [chartCategories]="barandLineCategories" [chartData]="barandLineData" color="#bc7af9">
+      </i2v-bar-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+
+</div>
+<div>
+  <!-- Vehicle color by its type -->
+  <kendo-tilelayout-item [col]="1" colSpan="10">
+    <kendo-tilelayout-item-body>
+      <i2v-stackedcolumn-chart heading="Vehicle color by its type" subHeading="in lakhs" [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+        [chartData]="vehicleColorByType">
+      </i2v-stackedcolumn-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+</div>
+<div>
+  <kendo-tilelayout-item reorderable="true" style="width: 100%">
+    <kendo-tilelayout-item-body style="width: 100%">
+      <i2v-column-chart
+        heading="Vehicle makes"
+        subHeading="in lakhs"
+        [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)"
+        (customFilterOutput)="onCustomFilterOutput($event)"
+        [chartCategories]="barandLineCategories"
+        [chartData]="barandLineData"
+        color="#ff865e"
+      >
+      </i2v-column-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+</div>
+<div>
+  <!-- Vehicle models -->
+  <kendo-tilelayout-item reorderable="true" style="width: 100%">
+    <kendo-tilelayout-item-body style="width: 100%">
+      <i2v-column-chart
+        heading="Vehicle models"
+        subHeading="in lakhs"
+        [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)"
+        (customFilterOutput)="onCustomFilterOutput($event)"
+        [chartCategories]="barandLineCategories"
+        [chartData]="barandLineData"
+        color="#a3bb98"
+      >
+      </i2v-column-chart>
+    </kendo-tilelayout-item-body>
+  </kendo-tilelayout-item>
+</div>
+
+    </kendo-tilelayout>
+</div>
+</div>
