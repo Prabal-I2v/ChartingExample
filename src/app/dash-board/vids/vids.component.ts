@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Enum_Entity, Enum_Method, Enum_WidgetType, PropertyType, RuleSet, WidgetRequestModel } from 'src/app/ChartingLib/chartinglib/Models/WidgetRequestModel';
+import { ChartingDataService } from 'src/app/ChartingLib/chartinglib/charting-data.service';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
 import { data } from 'src/app/ChartingLib/chartinglib/kendo-chart/commit-data';
 
@@ -9,14 +11,17 @@ import { data } from 'src/app/ChartingLib/chartinglib/kendo-chart/commit-data';
 })
 export class VidsComponent {
 
+  constructor(private chartingDataService: ChartingDataService) {
+
+  }
   customFilter: ICustomFilter = {
     "Area": ["Gurgaon", "Delhi", "Mumbai"],
     "Camera": ["Device 1", "Device 2", "Device 3", "Device 4"],
     "Server": ["CPU1", "CPU2", "GPU1", "GPU2"]
   }
 
-  
-  public barandLineData = [200, 450, 300, 125, 200, 450, 300, 125, 200, 450, 300, 125]
+
+  public barandLineData = [[200, 450, 300, 125, 200, 450, 300, 125, 200, 450, 300, 125]]
   public barandLineCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   public pieData = [
     { category: "0-14", value: 0.2545 },
@@ -38,15 +43,76 @@ export class VidsComponent {
     5: "Fri",
     6: "Sat"
   };
-  
- 
+
+
 
   onDaysFilterOutput(event) {
-      console.log("Date value : ", event);
+    console.log("Date value : ", event);
   }
 
   onCustomFilterOutput(event) {
     console.log("Filter value : ", event);
   }
+
+  getData() {
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1711521221084
+    widgetRequestModel.endTime = 1711521243832
+    widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+    widgetRequestModel.entity = Enum_Entity.Highway_ATCC
+    widgetRequestModel.method = Enum_Method.Sum
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Highway_ATCC",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+    widgetRequestModel.fieldName = {"bus" : PropertyType.Number, "truck" : PropertyType.Number, "motorbike" : PropertyType.Number, "car" : PropertyType.Number, "bicycle" : PropertyType.Number}
+    widgetRequestModel.groupBy1 = ""
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = true
+    widgetRequestModel.clubbingTime = false
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+  //   widgetRequestModel.propertyFilters = {
+  //     "rules": [],
+  //     "ruleSet": [
+  //         {
+  //             "rules": [
+  //                 {
+  //                     "field": "Truck",
+  //                     "operator": "NotEqual",
+  //                     "value": "DASModule"
+  //                 },
+  //                 {
+  //                     "field": "EventName",
+  //                     "operator": "Equal",
+  //                     "value": "Highway_ATCC"
+  //                 }
+  //             ],
+  //             "ruleset": [],
+  //             "condition": "and"
+  //         }
+  //     ],
+  //     "condition": "and"
+  // },
+    widgetRequestModel.refreshInterval = 1
+
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data));
+  }
+
 
 }
