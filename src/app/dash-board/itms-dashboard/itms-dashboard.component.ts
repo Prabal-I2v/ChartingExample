@@ -13,8 +13,15 @@ export class ItmsDashboardComponent {
   public LineData = [[200, 450, 300, 240],[100, 150, 50, 140],[250, 170, 230, 300],[180, 200, 110, 240]];
   public LineCategories = ['Week 1','Week 2','Week 3','Week 4'];
   public wrongWayCategories=['Week 1','Week 2','Week 3','Week 4'];
-  public wrongWayData=[47,21,53,41];
+  public wrongWayData=[50,21,53,41];
   public stackedColumnChartData = [[5,3,4,6,12,10,22,14,16,6,6,10,10,15]];
+  public stackedChartData=[[5,3,4,6,12,10,22,14,16,6,6,10,10,15],[5,3,4,6,12,10,22,14,16,6,6,10,10,15]]
+  public stackedpie= [
+    { category: "Total inflow", value: 2575689 },
+    { category: "Total outflow", value: 501032 },
+
+
+];
  public customerFootfall = [
     { category: "Bus", value: 11 },
     { category: "Car", value: 41 },

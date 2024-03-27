@@ -1,13 +1,13 @@
 <h1>ITMS Dashboard</h1>
 
-<div style="display: flex; flex-direction: column; gap: 20px">
-  <div style="display: flex; flex-direction: row; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 20px;height: 100%;">
+  <div style="display: flex; flex-direction: row; gap: 10px;height: 100%;">
 
 
     <kendo-tilelayout
       [resizable]="true"
       reorderable="true"
-      style="width: 100%; padding: 10px; display:flex;flex-direction: column;gap:20px"
+      style="width: 100%; padding: 10px; display:flex;flex-direction: column;gap:20px;height:100%"
 
     >
 
@@ -29,6 +29,7 @@
         [chartCategories]="barandLineCategories"
         [chartData]="barandLineData"
         color="#7091f5"
+        [mwidth]="30"
       >
       </i2v-column-chart>
     </kendo-tilelayout-item-body>
@@ -44,6 +45,23 @@
   </kendo-tilelayout-item>
 
 </div>
+
+<div>
+  <kendo-tilelayout-item reorderable="true" style="width: 100%">
+    <kendo-tilelayout-item-body style="width: 100%">
+      <div style="display: flex;flex-direction: column;">
+
+        <i2v-stackedcolumn-chart heading="Total no. of vehicle inflow and outflow " subHeading="in lakhs" [customFilters]="customFilter"
+        (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)" showChild="true"
+        [chartData]="stackedChartData">
+        <i2v-pie-chart chartCategories="['Total no. of outflow vehicles','Total no. of inflow vehicles']" [chartData]="stackedpie">
+        </i2v-pie-chart>
+      </i2v-stackedcolumn-chart>
+      </div>
+
+      </kendo-tilelayout-item-body>
+      </kendo-tilelayout-item>
+</div>
 <div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
   <!-- Total no. of violations -->
       <kendo-tilelayout-item reorderable="true" style="width: 50%">
@@ -57,6 +75,7 @@
             [chartCategories]="wrongWayCategories"
             [chartData]="wrongWayData"
             color="#ff9f29"
+            [mwidth]="30"
           >
           </i2v-column-chart>
         </kendo-tilelayout-item-body>
@@ -95,17 +114,17 @@
       <!-- Average speed of vehicle -->
       <kendo-tilelayout-item  [col]="1" colSpan="10"style="width: 50%">
         <kendo-tilelayout-item-body>
-          <i2v-line-chart heading="Average speed of vehicle" subHeading="in lakhs" [customFilters]="customFilter"
+          <i2v-area-chart heading="Average speed of vehicle" subHeading="in lakhs" [customFilters]="customFilter"
             (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
             [chartCategories]="LineCategories" [chartData]="LineData">
-          </i2v-line-chart>
+          </i2v-area-chart>
         </kendo-tilelayout-item-body>
       </kendo-tilelayout-item>
     </div>
 
 
 
-<div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
+<!-- <div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
   <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
     <kendo-tilelayout-item-body>
       <i2v-area-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
@@ -124,7 +143,7 @@
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
-</div>
+</div> -->
 <div>
   <!-- Vehicle color by its type -->
   <kendo-tilelayout-item [col]="1" colSpan="10">
@@ -148,6 +167,7 @@
         [chartCategories]="barandLineCategories"
         [chartData]="barandLineData"
         color="#ff865e"
+        [mwidth]="30"
       >
       </i2v-column-chart>
     </kendo-tilelayout-item-body>
@@ -166,6 +186,7 @@
         [chartCategories]="barandLineCategories"
         [chartData]="barandLineData"
         color="#a3bb98"
+        [mwidth]="72"
       >
       </i2v-column-chart>
     </kendo-tilelayout-item-body>
