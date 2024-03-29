@@ -14,6 +14,54 @@ export class VidsComponent {
   constructor(private chartingDataService: ChartingDataService) {
 
   }
+  public series = [
+    {
+        name: 'Tiger Team',
+        data: [100, 450, 360, 125],
+        color: '#FF6358'
+    },
+    {
+        name: 'Lemon Team',
+        data: [200, 380, 300, 115],
+        color: '#F7C62F'
+    },
+    {
+        name: 'Organic Team',
+        data:[ 250, 450, 256, 456],
+        color: '#55AB1D'
+    },
+    {
+        name: 'Ocean Team',
+        data: [400, 150, 300, 125],
+        color: '#28B4C8'
+    }];
+    pieDta=[
+      {
+        name: "Hydroelectric",
+        data:[ 20],
+
+      },
+      {
+        name: "Nuclear",
+        data: [31],
+      },
+      {
+        name: "Coal",
+        data: [17],
+      },
+      {
+        name: "Solar",
+        data: [52],
+      },
+      {
+        name: "Wind",
+        data:[22],
+      },
+      {
+        name: "Other",
+        data: [19],
+      },
+    ];
   customFilter: ICustomFilter = {
     "Area": ["Gurgaon", "Delhi", "Mumbai"],
     "Camera": ["Device 1", "Device 2", "Device 3", "Device 4"],
