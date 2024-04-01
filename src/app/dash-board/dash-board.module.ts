@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChartinglibModule } from '../ChartingLib/chartinglib/chartinglib.module';
 import { VidsComponent } from './vids/vids.component';
 import { FrsComponent } from './frs/frs.component';
-import { GaugesModule } from '@progress/kendo-angular-gauges';
-
-
+// import { GaugesModule } from '@progress/kendo-angular-gauges';
 
 @NgModule({
   declarations: [VidsComponent,
@@ -13,7 +11,7 @@ import { GaugesModule } from '@progress/kendo-angular-gauges';
   imports: [
     CommonModule,
     ChartinglibModule,
-    GaugesModule,
+    // GaugesModule,
   ],
   exports : [VidsComponent,FrsComponent]
 })

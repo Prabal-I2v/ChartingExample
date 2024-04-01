@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Enum_Entity, Enum_Method, Enum_WidgetType, PropertyType, RuleSet, WidgetRequestModel } from 'src/app/ChartingLib/chartinglib/Models/WidgetRequestModel';
+import { Enum_Entity, Enum_Method, Enum_Schema, Enum_WidgetType, PropertyType, RuleSet, WidgetRequestModel } from 'src/app/ChartingLib/chartinglib/Models/WidgetRequestModel';
 import { ChartingDataService } from 'src/app/ChartingLib/chartinglib/charting-data.service';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
 import { data } from 'src/app/ChartingLib/chartinglib/kendo-chart/commit-data';
@@ -57,10 +57,11 @@ export class VidsComponent {
   getData() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1711521221084
-    widgetRequestModel.endTime = 1711521243832
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
     widgetRequestModel.entity = Enum_Entity.Highway_ATCC
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.method = Enum_Method.Sum
     widgetRequestModel.baseFilter = {
       "rules": [
@@ -76,12 +77,12 @@ export class VidsComponent {
 
     },
     widgetRequestModel.fieldName = {"bus" : PropertyType.Number, "truck" : PropertyType.Number, "motorbike" : PropertyType.Number, "car" : PropertyType.Number, "bicycle" : PropertyType.Number}
-    widgetRequestModel.groupBy1 = ""
+    widgetRequestModel.groupBy1 = "AnalyticManagerId"
     widgetRequestModel.groupByOneIsTime = false
-    widgetRequestModel.groupBy2 = ""
-    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.groupBy2 = "month"
+    widgetRequestModel.groupByTwoIsTime = true
     widgetRequestModel.isDistinct = true
-    widgetRequestModel.clubbingTime = false
+    widgetRequestModel.ClubbingFieldName = "Total"
     widgetRequestModel.pagination = false
     widgetRequestModel.pageNumber = 0
     widgetRequestModel.pageLimit = 0
