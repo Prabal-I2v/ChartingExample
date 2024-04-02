@@ -54,7 +54,7 @@ export class VidsComponent {
     console.log("Filter value : ", event);
   }
 
-  getData() {
+  HighwayATCCCall() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
@@ -77,12 +77,13 @@ export class VidsComponent {
 
     },
     widgetRequestModel.fieldName = {"bus" : PropertyType.Number, "truck" : PropertyType.Number, "motorbike" : PropertyType.Number, "car" : PropertyType.Number, "bicycle" : PropertyType.Number}
-    widgetRequestModel.groupBy1 = "AnalyticManagerId"
-    widgetRequestModel.groupByOneIsTime = false
-    widgetRequestModel.groupBy2 = "month"
-    widgetRequestModel.groupByTwoIsTime = true
+    widgetRequestModel.groupBy1 = "month"
+    widgetRequestModel.groupByOneIsTime = true
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
     widgetRequestModel.isDistinct = true
     widgetRequestModel.ClubbingFieldName = "Total"
+    widgetRequestModel.ClubbingTime = true
     widgetRequestModel.pagination = false
     widgetRequestModel.pageNumber = 0
     widgetRequestModel.pageLimit = 0
@@ -115,5 +116,132 @@ export class VidsComponent {
     this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data));
   }
 
+  stoppedVehiclesQueryModelCall(){
+  //for Stopped Vehicles Queries
+  var stoppedVehiclesQueryModel = new WidgetRequestModel();
+  stoppedVehiclesQueryModel.id = 1;
+  stoppedVehiclesQueryModel.startTime = 1680118561
+  stoppedVehiclesQueryModel.endTime = 1711597647
+  stoppedVehiclesQueryModel.widgetType = Enum_WidgetType.PieChart
+  stoppedVehiclesQueryModel.entity = Enum_Entity.Vehicle_Stopped
+  stoppedVehiclesQueryModel.schemaName = Enum_Schema.Events
+  stoppedVehiclesQueryModel.method = Enum_Method.Count
+  stoppedVehiclesQueryModel.baseFilter = {
+    "rules": [
+      {
+        "field": "EventName",
+        "operator": "Equal",
+        "value": "Vehicle_Stopped",
+        "type": PropertyType.String
+      },
+    ],
+    "ruleSet": [],
+    "condition": "and"
 
+  },
+  stoppedVehiclesQueryModel.fieldName = {}
+  stoppedVehiclesQueryModel.groupBy1 = "VideoSourceId"
+  stoppedVehiclesQueryModel.groupByOneIsTime = false
+  stoppedVehiclesQueryModel.groupBy2 = ""
+  stoppedVehiclesQueryModel.groupByTwoIsTime = false
+  stoppedVehiclesQueryModel.isDistinct = true
+  stoppedVehiclesQueryModel.ClubbingFieldName = ""
+  stoppedVehiclesQueryModel.pagination = false
+  stoppedVehiclesQueryModel.pageNumber = 0
+  stoppedVehiclesQueryModel.ClubbingTime = true
+  stoppedVehiclesQueryModel.pageLimit = 0
+  stoppedVehiclesQueryModel.identifierFieldName = ""
+  stoppedVehiclesQueryModel.multiplicationFactor = 0
+  stoppedVehiclesQueryModel.refreshInterval = 1
+
+  this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data));
+  }
+
+  ANPRCall(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1711521221084
+    widgetRequestModel.endTime = 1711521243832
+    widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "ANPR",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+},
+widgetRequestModel.fieldName = {"trippleRiding" : PropertyType.Boolean}
+widgetRequestModel.groupBy1 = "VideoSourceId"
+widgetRequestModel.groupByOneIsTime = false
+widgetRequestModel.groupBy2 = ""
+widgetRequestModel.groupByTwoIsTime = false
+widgetRequestModel.isDistinct = false
+widgetRequestModel.ClubbingFieldName = ""
+widgetRequestModel.pagination = false
+widgetRequestModel.pageNumber = 0
+widgetRequestModel.pageLimit = 0
+widgetRequestModel.identifierFieldName = ""
+widgetRequestModel.multiplicationFactor = 0
+widgetRequestModel.propertyFilters = {
+      "rules": [{
+        "field": "trippleRiding",
+        "operator": "Equal",
+        "value": "true",
+        "type" : PropertyType.Boolean
+    }],
+      "ruleSet": [],
+      "condition": "and"
+  },
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data));
+  }
+
+  WrongWayCall(){
+    var stoppedVehiclesQueryModel = new WidgetRequestModel();
+    stoppedVehiclesQueryModel.id = 1;
+    stoppedVehiclesQueryModel.startTime = 1680620828
+    stoppedVehiclesQueryModel.endTime = 1712032732
+    stoppedVehiclesQueryModel.widgetType = Enum_WidgetType.BarChart
+    stoppedVehiclesQueryModel.entity = Enum_Entity.Wrong_Way_Detected
+    stoppedVehiclesQueryModel.schemaName = Enum_Schema.Events
+    stoppedVehiclesQueryModel.method = Enum_Method.Count
+    stoppedVehiclesQueryModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Wrong_Way_Detected",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+  
+    },
+    stoppedVehiclesQueryModel.fieldName = {}
+    stoppedVehiclesQueryModel.groupBy1 = "month"
+    stoppedVehiclesQueryModel.groupByOneIsTime = true
+    stoppedVehiclesQueryModel.groupBy2 = ""
+    stoppedVehiclesQueryModel.groupByTwoIsTime = false
+    stoppedVehiclesQueryModel.isDistinct = true
+    stoppedVehiclesQueryModel.ClubbingFieldName = ""
+    stoppedVehiclesQueryModel.ClubbingTime = true
+    stoppedVehiclesQueryModel.pagination = false
+    stoppedVehiclesQueryModel.pageNumber = 0
+    stoppedVehiclesQueryModel.pageLimit = 0
+    stoppedVehiclesQueryModel.identifierFieldName = ""
+    stoppedVehiclesQueryModel.multiplicationFactor = 0
+    stoppedVehiclesQueryModel.refreshInterval = 1
+  
+    this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data));
+  }
 }
