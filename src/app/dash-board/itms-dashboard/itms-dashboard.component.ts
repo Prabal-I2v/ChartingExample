@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartModel } from 'src/app/ChartingLib/chartinglib/Models/ChartsOutputModel';
 import { Enum_Entity, Enum_Method, Enum_Schema, Enum_WidgetType, PropertyType, WidgetRequestModel } from 'src/app/ChartingLib/chartinglib/Models/WidgetRequestModel';
 import { ChartingDataService } from 'src/app/ChartingLib/chartinglib/charting-data.service';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
@@ -14,7 +15,11 @@ export class ItmsDashboardComponent implements OnInit {
   constructor(private chartingDataService:ChartingDataService){
 
   }
+  TotalVehiclesData=new ChartModel();
   pieChartData=[];
+  months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
 //   public barandLineData = [200, 450, 300, 125, 200, 450, 300, 125, 200, 450, 300, 125]
 //   public barandLineCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 //   public LineData = [[200, 450, 300, 240],[100, 150, 50, 140],[250, 170, 230, 300],[180, 200, 110, 240]];
@@ -31,7 +36,6 @@ pieDta=[
   {
     name: "Hydroelectric",
     data:[ 20],
-
   },
   {
     name: "Nuclear",
@@ -75,7 +79,7 @@ pieDta=[
   },
   {
       name: 'Ocean Team',
-      data: [400, 150, 300, 125],
+      data: [400],
       color: '#28B4C8'
   }];
 //   public singleseries = [
@@ -103,7 +107,7 @@ pieDta=[
 //  public customerFootfall = [
 //     { category: "Bus", value: 11 },
 //     { category: "Car", value: 41 },
-//     { category: "Motorbike", value: 26 },
+//     { category: "Motorbike", value: 26 },g
 //     { category: "Truck", value: 6 },
 //     { category: "Min-Truck", value: 12 },
 //     { category: "Van", value: 4 },
@@ -128,24 +132,32 @@ pieDta=[
     "Server": ["CPU1", "CPU2", "GPU1", "GPU2"]
   }
   onDaysFilterOutput(event) {
+    //day changed
+    console.log(event);
 
   }
   onCustomFilterOutput(event) {
+    //custom filter
 
   }
 
   ngOnInit(): void {
-      // this.getData();
+    this.getTotalNoOfVehicles();
   }
   getTotalNoOfVehicles(){
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1711521220000
+    widgetRequestModel.startTime = 1683497566
     widgetRequestModel.endTime = 1711521243832
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
     widgetRequestModel.schemaName=Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.propertyFilters = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+  },
     widgetRequestModel.baseFilter = {
       "rules": [
         {
@@ -173,12 +185,31 @@ pieDta=[
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
     this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+      var formattedDates=[];
+      if(widgetRequestModel.groupBy1 == "month"){
+       data.labels[0].value.forEach(dateTimeString => {
+        const [datePart, timePart] = dateTimeString.split(" ");
+        const [day, month, year] = datePart.split("-");
+        const [hour, minute, second] = timePart.split(":");
+        const date = new Date(year, month - 1, day, hour, minute, second);
+        const Month= date.getMonth();
+      formattedDates.push(this.months[Month]);
+      });
+      this.TotalVehiclesData.chartModelData.labels=formattedDates;
+      }
+      else{
+        this.TotalVehiclesData.chartModelData.labels=data.labels[0].value;
+      }
+        this.TotalVehiclesData.chartModelData.data=data.data[0].data;
+        this.TotalVehiclesData.setChartData()
+
+      console.log(this.TotalVehiclesData);
     });
   }
   getTotalNoOfViolations(){
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1711521220000
+    widgetRequestModel.startTime = 1683497566
     widgetRequestModel.endTime = 1711521243832
     widgetRequestModel.widgetType = Enum_WidgetType.BarChart
     widgetRequestModel.schemaName=Enum_Schema.Events

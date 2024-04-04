@@ -29,17 +29,16 @@
   <kendo-tilelayout-item reorderable="true" style="width: 50%">
     <kendo-tilelayout-item-body style="width: 100%">
       <button (click)="getTotalNoOfVehicles()">GetData</button>
-      <i2v-multi-column-chart
+      <i2v-column-chart
         heading="Total no of Vehicles"
         subHeading="in lakhs"
-        [customFilters]="customFilter"
         (daysFilterOutput)="onDaysFilterOutput($event)"
-        (customFilterOutput)="onCustomFilterOutput($event)"
-        [chartData]="series"
+        [chartData]="TotalVehiclesData.chartModel"
+        [chartCategories]="TotalVehiclesData.chartModelData.labels"
         color="#7091f5"
         [mwidth]="30"
       >
-      </i2v-multi-column-chart>
+      </i2v-column-chart>
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
@@ -61,7 +60,7 @@
       <div style="display: flex;flex-direction: column;">
 
         <i2v-stackedcolumn-chart heading="Total no. of vehicle inflow and outflow " subHeading="in lakhs" [customFilters]="customFilter"
-        (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)" showChild="true"
+        (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)" showChild="true" [chartCategories]="['week1','week2','week3','week4']"
         [chartData]="series">
         <i2v-pie-chart chartCategories="['Total no. of outflow vehicles','Total no. of inflow vehicles']" [chartData]="series">
         </i2v-pie-chart>

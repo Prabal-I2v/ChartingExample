@@ -160,7 +160,7 @@ export class VidsComponent {
   ANPRCall(){
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1711521221084
+    widgetRequestModel.startTime = 1683497566
     widgetRequestModel.endTime = 1711521243832
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
     widgetRequestModel.schemaName=Enum_Schema.Events
