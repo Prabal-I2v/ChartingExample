@@ -43,7 +43,7 @@
 <div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
   <kendo-tilelayout-item reorderable="true" style="width: 50%">
     <kendo-tilelayout-item-body style="width: 100%">
-      <i2v-column-chart
+      <!-- <i2v-column-chart
         heading="Wrong way vehicles"
         subHeading="in lakhs"
         [customFilters]="customFilter"
@@ -53,16 +53,16 @@
         [chartData]="barandLineData"
         color="#7091f5"
       >
-      </i2v-column-chart>
+      </i2v-column-chart> -->
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
   <kendo-tilelayout-item style="width: 50%">
     <kendo-tilelayout-item-body>
-      <app-i2v-donut-chart heading="Vehicles types" [customFilters]="customFilter"
+      <!-- <app-i2v-donut-chart heading="Vehicles types" [customFilters]="customFilter"
       (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"  [seriesColors]='["#ff9f29","#7091f5","#64ccc5","#db3e41","#aeb6c9","#ff731d"]' [position]="'right'"
       [chartData]="customerFootfall">
-    </app-i2v-donut-chart>
+    </app-i2v-donut-chart> -->
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
@@ -98,10 +98,10 @@
 
 <div><kendo-tilelayout-item  [col]="1" colSpan="10">
   <kendo-tilelayout-item-body>
-    <i2v-heatmap-chart heading="Traffic / violation density by" [customFilters]="customFilter"
+    <!-- <i2v-heatmap-chart heading="Traffic / violation density by" [customFilters]="customFilter"
       (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
       [chartData]="HeatMapData" [color]="'#0286cd'">
-    </i2v-heatmap-chart>
+    </i2v-heatmap-chart> -->
   </kendo-tilelayout-item-body>
 </kendo-tilelayout-item></div>
 
