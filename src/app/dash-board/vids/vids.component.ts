@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ClientChartModel } from 'src/app/ChartingLib/chartinglib/Models/ClientChartModel';
 import { Enum_Entity, Enum_Method, Enum_Schema, Enum_WidgetType, PropertyType, RuleSet, WidgetRequestModel } from 'src/app/ChartingLib/chartinglib/Models/WidgetRequestModel';
 import { ChartingDataService } from 'src/app/ChartingLib/chartinglib/charting-data.service';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
@@ -44,6 +45,8 @@ export class VidsComponent {
     6: "Sat"
   };
 
+
+  ModelMadeByServer : ClientChartModel;
 
 
   onDaysFilterOutput(event) {
@@ -154,14 +157,16 @@ export class VidsComponent {
   stoppedVehiclesQueryModel.multiplicationFactor = 0
   stoppedVehiclesQueryModel.refreshInterval = 1
 
-  this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data));
+  this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data) =>{
+    console.log(data)
+  });
   }
 
   ANPRCall(){
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1711521221084
-    widgetRequestModel.endTime = 1711521243832
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
     widgetRequestModel.schemaName=Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
@@ -171,7 +176,7 @@ export class VidsComponent {
         {
           "field": "EventName",
           "operator": "Equal",
-          "value": "ANPR",
+          "value": "Vehicles_Stopped",
           "type": PropertyType.String
         },
       ],
@@ -242,6 +247,334 @@ widgetRequestModel.propertyFilters = {
     stoppedVehiclesQueryModel.multiplicationFactor = 0
     stoppedVehiclesQueryModel.refreshInterval = 1
   
-    this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data));
+    this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data)=>{
+        this.ModelMadeByServer = data
+    });
+
+  }
+
+  getViolationTypes(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+    widgetRequestModel.fieldName = {"redLightViolated" : PropertyType.Boolean,"trippleRiding":PropertyType.Boolean,"noHelmet":PropertyType.Boolean,"speedViolated":PropertyType.Boolean}
+    widgetRequestModel.propertyFilters = {
+      "rules": [{
+        "field": "redLightViolated",
+        "operator": "Equal",
+        "value": "true",
+        "type" : PropertyType.Boolean
+    },
+    {
+      "field": "trippleRiding",
+      "operator": "Equal",
+      "value": "true",
+      "type" : PropertyType.Boolean
+  },
+  {
+    "field": "noHelmet",
+    "operator": "Equal",
+    "value": "true",
+    "type" : PropertyType.Boolean
+},
+{
+  "field": "speedViolated",
+  "operator": "Equal",
+  "value": "true",
+  "type" : PropertyType.Boolean
+},
+  ],
+      "ruleSet": [],
+      "condition": "and"
+  }
+    widgetRequestModel.groupBy1 = "VideoSourceId"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    //  this.pieChartData=  this.chartingDataService.tranformData( data);
+    this.ModelMadeByServer = data
+    });
+  }
+
+  TotalNoOfVehicles()
+  {
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+},
+widgetRequestModel.fieldName = {}
+widgetRequestModel.groupBy1 = "month"
+widgetRequestModel.groupByOneIsTime = true
+widgetRequestModel.groupBy2 = ""
+widgetRequestModel.groupByTwoIsTime = false
+widgetRequestModel.isDistinct = false
+widgetRequestModel.ClubbingFieldName = ""
+widgetRequestModel.ClubbingTime = true
+widgetRequestModel.pagination = false
+widgetRequestModel.pageNumber = 0
+widgetRequestModel.pageLimit = 0
+widgetRequestModel.identifierFieldName = ""
+widgetRequestModel.multiplicationFactor = 0
+widgetRequestModel.propertyFilters = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+  },
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+      this.ModelMadeByServer = data
+    });
+    
+  }
+  
+  VehiclesTypes()
+  {
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+},
+widgetRequestModel.fieldName = {}
+widgetRequestModel.groupBy1 = "Category"
+widgetRequestModel.groupByOneIsTime = false
+widgetRequestModel.groupBy2 = ""
+widgetRequestModel.groupByTwoIsTime = false
+widgetRequestModel.isDistinct = false
+widgetRequestModel.ClubbingFieldName = ""
+widgetRequestModel.ClubbingTime = true
+widgetRequestModel.pagination = false
+widgetRequestModel.pageNumber = 0
+widgetRequestModel.pageLimit = 0
+widgetRequestModel.identifierFieldName = ""
+widgetRequestModel.multiplicationFactor = 0
+widgetRequestModel.propertyFilters = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+  },
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+      this.ModelMadeByServer = data
+    });
+    
+  }
+
+  getTotalViolationTypes(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+    widgetRequestModel.fieldName = {"redLightViolated" : PropertyType.Boolean,"trippleRiding":PropertyType.Boolean,"noHelmet":PropertyType.Boolean,"speedViolated":PropertyType.Boolean}
+    widgetRequestModel.propertyFilters = {
+      "rules": [{
+        "field": "redLightViolated",
+        "operator": "Equal",
+        "value": "true",
+        "type" : PropertyType.Boolean
+    },
+    {
+      "field": "trippleRiding",
+      "operator": "Equal",
+      "value": "true",
+      "type" : PropertyType.Boolean
+  },
+  {
+    "field": "noHelmet",
+    "operator": "Equal",
+    "value": "true",
+    "type" : PropertyType.Boolean
+},
+{
+  "field": "speedViolated",
+  "operator": "Equal",
+  "value": "true",
+  "type" : PropertyType.Boolean
+},
+  ],
+      "ruleSet": [],
+      "condition": "and"
+  }
+    widgetRequestModel.groupBy1 = "VideoSourceId"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = "Total"
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+      this.ModelMadeByServer = data
+    });
+  }
+  getVehicleByColor(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+    widgetRequestModel.fieldName = {"Category" : PropertyType.String}
+    widgetRequestModel.propertyFilters = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+  }
+    widgetRequestModel.groupBy1 = "Category"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = "VehicleColor"
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    //  this.pieChartData=  this.chartingDataService.tranformData( data);
+    this.ModelMadeByServer = data
+    });
+  }
+  getVehicleByMake(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+    widgetRequestModel.fieldName = {}
+    widgetRequestModel.propertyFilters = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+  }
+    widgetRequestModel.groupBy1 = "vehiclemake"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    //  this.pieChartData=  this.chartingDataService.tranformData( data);
+    this.ModelMadeByServer = data
+    });
   }
 }
