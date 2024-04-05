@@ -1,24 +1,34 @@
 <div>
+  <button (click)="stoppedVehiclesQueryModelCall()">stoppedVehiclesQueryModelCall</button>
+  <button (click)="HighwayATCCCall()">HighwayATCCCall</button>
+  <button (click)="ANPRCall()">ANPRCall</button>
+  <button (click)="WrongWayCall()">WrongWayCall</button>
+  <button (click)="getViolationTypes()">getViolationTypes</button>
+  <button (click)="getTotalViolationTypes()">getTotalViolationTypes</button>
+  <button (click)="TotalNoOfVehicles()">TotalNoOfVehicles</button>
+  <button (click)="VehiclesTypes()">VehiclesTypes</button>
+  <button (click)="getVehicleByColor()">getVehicleByColor</button>
+  <button (click)="getVehicleByMake()">getVehicleByMake</button>
   <kendo-tilelayout autoFlow="none" [columns]="10" [gap]="10" [reorderable]="true" [resizable]="true">
     <kendo-tilelayout-item title="Bar Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
-        <i2v-bar-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+        <i2v-column-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
           (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
-          [chartCategories]="barandLineCategories" [chartData]="barandLineData">
-        </i2v-bar-chart>
+          [chartData]="ModelMadeByServer">
+        </i2v-column-chart>
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
 
-    <kendo-tilelayout-item title="Pie Chart" [col]="1" colSpan="10">
+    <!-- <kendo-tilelayout-item title="Pie Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
         <i2v-pie-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
           (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
           [chartData]="pieData">
         </i2v-pie-chart>
       </kendo-tilelayout-item-body>
-    </kendo-tilelayout-item>
-
+    </kendo-tilelayout-item> -->
+<!-- 
     <kendo-tilelayout-item title="Column Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
         <i2v-column-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
@@ -39,10 +49,10 @@
 
     <kendo-tilelayout-item title="Stacked Bar Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
-        <i2v-stackedcolumn-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
-          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+        <i2v-stackedbar-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)" [chartCategories]="barandLineCategories"
           [chartData]="stackedColumnChartData">
-        </i2v-stackedcolumn-chart>
+        </i2v-stackedbar-chart>
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
@@ -64,14 +74,14 @@
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
-    <kendo-tilelayout-item title="Line Chart" [col]="1" colSpan="10">
+    <kendo-tilelayout-item title="Area Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
         <i2v-area-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
           (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
           [chartCategories]="stackedColumnChartData" [chartData]="stackedColumnChartData">
         </i2v-area-chart>
       </kendo-tilelayout-item-body>
-    </kendo-tilelayout-item>
+    </kendo-tilelayout-item> -->
 
 
     <!-- <kendo-tilelayout-item title="Bar Chart" [col]="2">

@@ -12,7 +12,7 @@ import { grid_employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/empl
 export class FrsComponent implements OnInit {
   public barandLineData = [200, 450, 300, 125, 200, 450, 300, 125, 200, 450, 300, 125]
   public barandLineCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  public gridData: unknown[] = grid_employees;
+  public gridData: unknown[] = employees;
   public gridView: unknown[];
   public mySelection: string[] = [];
   public pdfSVG: SVGIcon = filePdfIcon;
