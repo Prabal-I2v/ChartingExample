@@ -116,7 +116,9 @@ export class VidsComponent {
   // },
     widgetRequestModel.refreshInterval = 1
 
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data));
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+      this.ModelMadeByServer = data
+    });
   }
 
   stoppedVehiclesQueryModelCall(){
@@ -159,6 +161,7 @@ export class VidsComponent {
 
   this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data) =>{
     console.log(data)
+    this.ModelMadeByServer = data
   });
   }
 

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { DashBoardModule } from './dash-board/dash-board.module';
 import { ChartinglibModule } from './ChartingLib/chartinglib/chartinglib.module';
 
-
+import 'hammerjs';
 
 @NgModule({
   declarations: [
