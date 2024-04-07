@@ -80,9 +80,20 @@ export class VidsComponent {
 
     },
     widgetRequestModel.fieldName = {"bus" : PropertyType.Number, "truck" : PropertyType.Number, "motorbike" : PropertyType.Number, "car" : PropertyType.Number, "bicycle" : PropertyType.Number}
-    widgetRequestModel.groupBy1 = "month"
-    widgetRequestModel.groupByOneIsTime = true
-    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.joinableEntities=[
+      {
+        entity : Enum_Entity.VideoSources,
+        joinOn : "Id",
+        joinWith : 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+      }
+    ],
+    widgetRequestModel.groupBy1PropertyName = "",
+    widgetRequestModel.groupBy2PropertyName = "",
+    widgetRequestModel.groupBy1 = "month",
+    widgetRequestModel.groupByOneIsTime = true,
+    widgetRequestModel.groupBy2 = "",
     widgetRequestModel.groupByTwoIsTime = false
     widgetRequestModel.isDistinct = true
     widgetRequestModel.ClubbingFieldName = "Total"
@@ -123,15 +134,15 @@ export class VidsComponent {
 
   stoppedVehiclesQueryModelCall(){
   //for Stopped Vehicles Queries
-  var stoppedVehiclesQueryModel = new WidgetRequestModel();
-  stoppedVehiclesQueryModel.id = 1;
-  stoppedVehiclesQueryModel.startTime = 1680118561
-  stoppedVehiclesQueryModel.endTime = 1711597647
-  stoppedVehiclesQueryModel.widgetType = Enum_WidgetType.PieChart
-  stoppedVehiclesQueryModel.entity = Enum_Entity.Vehicle_Stopped
-  stoppedVehiclesQueryModel.schemaName = Enum_Schema.Events
-  stoppedVehiclesQueryModel.method = Enum_Method.Count
-  stoppedVehiclesQueryModel.baseFilter = {
+  var widgetRequestModel = new WidgetRequestModel();
+  widgetRequestModel.id = 1;
+  widgetRequestModel.startTime = 1680118561
+  widgetRequestModel.endTime = 1711597647
+  widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+  widgetRequestModel.entity = Enum_Entity.Vehicle_Stopped
+  widgetRequestModel.schemaName = Enum_Schema.Events
+  widgetRequestModel.method = Enum_Method.Count
+  widgetRequestModel.baseFilter = {
     "rules": [
       {
         "field": "EventName",
@@ -144,22 +155,33 @@ export class VidsComponent {
     "condition": "and"
 
   },
-  stoppedVehiclesQueryModel.fieldName = {}
-  stoppedVehiclesQueryModel.groupBy1 = "VideoSourceId"
-  stoppedVehiclesQueryModel.groupByOneIsTime = false
-  stoppedVehiclesQueryModel.groupBy2 = ""
-  stoppedVehiclesQueryModel.groupByTwoIsTime = false
-  stoppedVehiclesQueryModel.isDistinct = true
-  stoppedVehiclesQueryModel.ClubbingFieldName = ""
-  stoppedVehiclesQueryModel.pagination = false
-  stoppedVehiclesQueryModel.pageNumber = 0
-  stoppedVehiclesQueryModel.ClubbingTime = true
-  stoppedVehiclesQueryModel.pageLimit = 0
-  stoppedVehiclesQueryModel.identifierFieldName = ""
-  stoppedVehiclesQueryModel.multiplicationFactor = 0
-  stoppedVehiclesQueryModel.refreshInterval = 1
+  widgetRequestModel.joinableEntities=[
+    {
+      entity : Enum_Entity.VideoSources,
+      joinOn : "Id",
+      joinWith : 'VideoSourceId',
+      schema: Enum_Schema.Public,
+      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+    }
+  ]
+  widgetRequestModel.fieldName = {}
+  widgetRequestModel.groupBy1 = "VideoSourceId"
+  widgetRequestModel.groupBy1PropertyName = "VideoSourceName"
+  widgetRequestModel.groupByOneIsTime = false
+  widgetRequestModel.groupBy2 = ""
+  widgetRequestModel.groupByTwoIsTime = false
+  widgetRequestModel.groupBy2PropertyName = ""
+  widgetRequestModel.isDistinct = true
+  widgetRequestModel.ClubbingFieldName = ""
+  widgetRequestModel.pagination = false
+  widgetRequestModel.pageNumber = 0
+  widgetRequestModel.ClubbingTime = true
+  widgetRequestModel.pageLimit = 0
+  widgetRequestModel.identifierFieldName = ""
+  widgetRequestModel.multiplicationFactor = 0
+  widgetRequestModel.refreshInterval = 1
 
-  this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data) =>{
+  this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) =>{
     console.log(data)
     this.ModelMadeByServer = data
   });
@@ -188,6 +210,17 @@ export class VidsComponent {
 
 },
 widgetRequestModel.fieldName = {"trippleRiding" : PropertyType.Boolean}
+widgetRequestModel.joinableEntities=[
+  {
+    entity : Enum_Entity.VideoSources,
+    joinOn : "Id",
+    joinWith : 'VideoSourceId',
+    schema: Enum_Schema.Public,
+    properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+  }
+],
+widgetRequestModel.groupBy1PropertyName = "VideoSourceName",
+widgetRequestModel.groupBy2PropertyName = "",
 widgetRequestModel.groupBy1 = "VideoSourceId"
 widgetRequestModel.groupByOneIsTime = false
 widgetRequestModel.groupBy2 = ""
@@ -214,15 +247,15 @@ widgetRequestModel.propertyFilters = {
   }
 
   WrongWayCall(){
-    var stoppedVehiclesQueryModel = new WidgetRequestModel();
-    stoppedVehiclesQueryModel.id = 1;
-    stoppedVehiclesQueryModel.startTime = 1680620828
-    stoppedVehiclesQueryModel.endTime = 1712032732
-    stoppedVehiclesQueryModel.widgetType = Enum_WidgetType.BarChart
-    stoppedVehiclesQueryModel.entity = Enum_Entity.Wrong_Way_Detected
-    stoppedVehiclesQueryModel.schemaName = Enum_Schema.Events
-    stoppedVehiclesQueryModel.method = Enum_Method.Count
-    stoppedVehiclesQueryModel.baseFilter = {
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680620828
+    widgetRequestModel.endTime = 1712032732
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.entity = Enum_Entity.Wrong_Way_Detected
+    widgetRequestModel.schemaName = Enum_Schema.Events
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
       "rules": [
         {
           "field": "EventName",
@@ -235,22 +268,33 @@ widgetRequestModel.propertyFilters = {
       "condition": "and"
   
     },
-    stoppedVehiclesQueryModel.fieldName = {}
-    stoppedVehiclesQueryModel.groupBy1 = "month"
-    stoppedVehiclesQueryModel.groupByOneIsTime = true
-    stoppedVehiclesQueryModel.groupBy2 = ""
-    stoppedVehiclesQueryModel.groupByTwoIsTime = false
-    stoppedVehiclesQueryModel.isDistinct = true
-    stoppedVehiclesQueryModel.ClubbingFieldName = ""
-    stoppedVehiclesQueryModel.ClubbingTime = true
-    stoppedVehiclesQueryModel.pagination = false
-    stoppedVehiclesQueryModel.pageNumber = 0
-    stoppedVehiclesQueryModel.pageLimit = 0
-    stoppedVehiclesQueryModel.identifierFieldName = ""
-    stoppedVehiclesQueryModel.multiplicationFactor = 0
-    stoppedVehiclesQueryModel.refreshInterval = 1
+    widgetRequestModel.joinableEntities=[
+      {
+        entity : Enum_Entity.VideoSources,
+        joinOn : "Id",
+        joinWith : 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+      }
+    ],
+    widgetRequestModel.groupBy1PropertyName = "",
+    widgetRequestModel.groupBy2PropertyName = "",
+    widgetRequestModel.fieldName = {}
+    widgetRequestModel.groupBy1 = "month"
+    widgetRequestModel.groupByOneIsTime = true
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = true
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.ClubbingTime = true
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
   
-    this.chartingDataService.getChartingData(stoppedVehiclesQueryModel).subscribe((data)=>{
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
         this.ModelMadeByServer = data
     });
 
@@ -308,6 +352,17 @@ widgetRequestModel.propertyFilters = {
       "ruleSet": [],
       "condition": "and"
   }
+  widgetRequestModel.joinableEntities=[
+    {
+      entity : Enum_Entity.VideoSources,
+      joinOn : "Id",
+      joinWith : 'VideoSourceId',
+      schema: Enum_Schema.Public,
+      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+    }
+  ],
+  widgetRequestModel.groupBy1PropertyName = "VideoSourceName",
+  widgetRequestModel.groupBy2PropertyName = "",
     widgetRequestModel.groupBy1 = "VideoSourceId"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
@@ -350,6 +405,17 @@ widgetRequestModel.propertyFilters = {
 
 },
 widgetRequestModel.fieldName = {}
+widgetRequestModel.joinableEntities=[
+  {
+    entity : Enum_Entity.VideoSources,
+    joinOn : "Id",
+    joinWith : 'VideoSourceId',
+    schema: Enum_Schema.Public,
+    properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+  }
+],
+widgetRequestModel.groupBy1PropertyName = "",
+widgetRequestModel.groupBy2PropertyName = "",
 widgetRequestModel.groupBy1 = "month"
 widgetRequestModel.groupByOneIsTime = true
 widgetRequestModel.groupBy2 = ""
@@ -398,6 +464,17 @@ widgetRequestModel.propertyFilters = {
 
 },
 widgetRequestModel.fieldName = {}
+widgetRequestModel.joinableEntities=[
+  {
+    entity : Enum_Entity.VideoSources,
+    joinOn : "Id",
+    joinWith : 'VideoSourceId',
+    schema: Enum_Schema.Public,
+    properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+  }
+],
+widgetRequestModel.groupBy1PropertyName = "",
+widgetRequestModel.groupBy2PropertyName = "",
 widgetRequestModel.groupBy1 = "Category"
 widgetRequestModel.groupByOneIsTime = false
 widgetRequestModel.groupBy2 = ""
@@ -474,6 +551,17 @@ widgetRequestModel.propertyFilters = {
       "ruleSet": [],
       "condition": "and"
   }
+  widgetRequestModel.joinableEntities=[
+    {
+      entity : Enum_Entity.VideoSources,
+      joinOn : "Id",
+      joinWith : 'VideoSourceId',
+      schema: Enum_Schema.Public,
+      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+    }
+  ],
+  widgetRequestModel.groupBy1PropertyName = "VideoSourceName",
+  widgetRequestModel.groupBy2PropertyName = "",
     widgetRequestModel.groupBy1 = "VideoSourceId"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
@@ -518,6 +606,17 @@ widgetRequestModel.propertyFilters = {
       "ruleSet": [],
       "condition": "and"
   }
+  widgetRequestModel.joinableEntities=[
+    {
+      entity : Enum_Entity.VideoSources,
+      joinOn : "Id",
+      joinWith : 'VideoSourceId',
+      schema: Enum_Schema.Public,
+      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+    }
+  ],
+  widgetRequestModel.groupBy1PropertyName = "",
+  widgetRequestModel.groupBy2PropertyName = "",
     widgetRequestModel.groupBy1 = "Category"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = "VehicleColor"
@@ -563,6 +662,17 @@ widgetRequestModel.propertyFilters = {
       "ruleSet": [],
       "condition": "and"
   }
+  widgetRequestModel.joinableEntities=[
+    {
+      entity : Enum_Entity.VideoSources,
+      joinOn : "Id",
+      joinWith : 'VideoSourceId',
+      schema: Enum_Schema.Public,
+      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+    }
+  ],
+  widgetRequestModel.groupBy1PropertyName = "",
+  widgetRequestModel.groupBy2PropertyName = "",
     widgetRequestModel.groupBy1 = "vehiclemake"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
