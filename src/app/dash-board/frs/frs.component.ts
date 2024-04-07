@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
-import { employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/employees';
 import { images } from 'src/app/ChartingLib/chartinglib/kendo-chart/images';
 import { SVGIcon, filePdfIcon, fileExcelIcon } from "@progress/kendo-svg-icons"
-// import { employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/employees';
+import { grid_employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/emplye';
 
 @Component({
   selector: 'app-frs',
@@ -39,7 +38,7 @@ export class FrsComponent implements OnInit {
     return `${args.dataItem.category} ${args.dataItem.value *100}%`;
   }
   //gauge
-  public gaugevalue = 30;
+  public gaugevalue ="30";
 
   ngOnInit(): void {
     this.gridView = this.gridData;

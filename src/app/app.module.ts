@@ -18,7 +18,7 @@ import 'hammerjs';
     ChartinglibModule
 
   ],
-  providers: [ ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
