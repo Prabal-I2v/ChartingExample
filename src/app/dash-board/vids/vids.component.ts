@@ -266,7 +266,7 @@ widgetRequestModel.propertyFilters = {
       ],
       "ruleSet": [],
       "condition": "and"
-  
+
     },
     widgetRequestModel.joinableEntities=[
       {
@@ -293,7 +293,7 @@ widgetRequestModel.propertyFilters = {
     widgetRequestModel.identifierFieldName = ""
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
-  
+
     this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
         this.ModelMadeByServer = data
     });
@@ -303,7 +303,7 @@ widgetRequestModel.propertyFilters = {
   getViolationTypes(){
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.startTime = 1680470793
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.BarChart
     widgetRequestModel.schemaName=Enum_Schema.Events
@@ -314,7 +314,7 @@ widgetRequestModel.propertyFilters = {
         {
           "field": "EventName",
           "operator": "Equal",
-          "value": "Vehicle_Stopped",
+          "value": "ANPR",
           "type": PropertyType.String
         },
       ],
@@ -437,9 +437,9 @@ widgetRequestModel.propertyFilters = {
     this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
       this.ModelMadeByServer = data
     });
-    
+
   }
-  
+
   VehiclesTypes()
   {
     var widgetRequestModel = new WidgetRequestModel();
@@ -496,7 +496,7 @@ widgetRequestModel.propertyFilters = {
     this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
       this.ModelMadeByServer = data
     });
-    
+
   }
 
   getTotalViolationTypes(){
@@ -513,7 +513,7 @@ widgetRequestModel.propertyFilters = {
         {
           "field": "EventName",
           "operator": "Equal",
-          "value": "Vehicle_Stopped",
+          "value": "ANPR",
           "type": PropertyType.String
         },
       ],

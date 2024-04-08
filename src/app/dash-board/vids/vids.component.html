@@ -9,9 +9,12 @@
   <button (click)="VehiclesTypes()">VehiclesTypes</button>
   <button (click)="getVehicleByColor()">getVehicleByColor</button>
   <button (click)="getVehicleByMake()">getVehicleByMake</button>
+
+
   <kendo-tilelayout autoFlow="none" [columns]="10" [gap]="10" [reorderable]="true" [resizable]="true">
     <kendo-tilelayout-item title="Bar Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
+
         <i2v-column-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
           (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
           [chartData]="ModelMadeByServer">
@@ -28,7 +31,7 @@
         </i2v-pie-chart>
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item> -->
-<!-- 
+<!--
     <kendo-tilelayout-item title="Column Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
         <i2v-column-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"

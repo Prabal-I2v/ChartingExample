@@ -10,7 +10,7 @@
       style="width: 100%; padding: 10px; display:flex;flex-direction: column;gap:20px"
 
     >
-    <div style="display: flex;flex-direction: row;gap:20px;width:100%;justify-content: space-between;">
+    <!-- <div style="display: flex;flex-direction: row;gap:20px;width:100%;justify-content: space-between;">
       <kendo-tilelayout-item reorderable="true" style="width: 50%">
         <kendo-tilelayout-item-body style="width: 100%">
       <i2v-kpi-chart  [KPIHeading]="'Total no. of vehicles'" [disableTimeFilter]="true" [data]="[10,40,30,60]" disa [value]="'15,67,785'" [percentValue]="'9'" style="width:25%" linecolor="green"></i2v-kpi-chart>
@@ -31,7 +31,7 @@
       <i2v-kpi-chart  [KPIHeading]="'Most seen vehicle type: car'"[disableTimeFilter]="true"  [data]="[5,25,35,25,35,45]" [value]="'24,736'" [percentValue]="'10.36'" style="width:25%" linecolor="green"></i2v-kpi-chart>
        </kendo-tilelayout-item-body>
        </kendo-tilelayout-item>
-    </div>
+    </div> -->
 
 
 
@@ -43,33 +43,29 @@
 <div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
   <kendo-tilelayout-item reorderable="true" style="width: 50%">
     <kendo-tilelayout-item-body style="width: 100%">
-      <!-- <i2v-column-chart
-        heading="Wrong way vehicles"
+      <i2v-column-chart
+        heading="Total no. of vehicles"
         subHeading="in lakhs"
-        [customFilters]="customFilter"
         (daysFilterOutput)="onDaysFilterOutput($event)"
-        (customFilterOutput)="onCustomFilterOutput($event)"
-        [chartCategories]="barandLineCategories"
-        [chartData]="barandLineData"
-        color="#7091f5"
+        [chartData]="TotalViolationTypes"
       >
-      </i2v-column-chart> -->
+      </i2v-column-chart>
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
   <kendo-tilelayout-item style="width: 50%">
     <kendo-tilelayout-item-body>
-      <!-- <app-i2v-donut-chart heading="Vehicles types" [customFilters]="customFilter"
-      (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"  [seriesColors]='["#ff9f29","#7091f5","#64ccc5","#db3e41","#aeb6c9","#ff731d"]' [position]="'right'"
-      [chartData]="customerFootfall">
-    </app-i2v-donut-chart> -->
+      <!-- <i2v-donut-chart heading="Vehicles types" [customFilters]="customFilter"
+      (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+      [chartData]="VehicleTypes">
+    </i2v-donut-chart> -->
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
 </div>
-<div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
+<!-- <div  style="width: 100%; display:flex;flex-direction: row;gap:20px"> -->
   <!-- Total no. of violations -->
-      <kendo-tilelayout-item reorderable="true" style="width: 50%">
+      <!-- <kendo-tilelayout-item reorderable="true" style="width: 50%">
         <kendo-tilelayout-item-body style="width: 100%">
           <i2v-column-chart
             heading="Total no. of violations"
@@ -83,9 +79,9 @@
           >
           </i2v-column-chart>
         </kendo-tilelayout-item-body>
-      </kendo-tilelayout-item>
+      </kendo-tilelayout-item> -->
       <!-- Violations type -->
-      <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
+      <!-- <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
         <kendo-tilelayout-item-body>
           <i2v-bar-chart heading="Violations type" subHeading="in lakhs" [customFilters]="customFilter"
             (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
@@ -94,19 +90,19 @@
         </kendo-tilelayout-item-body>
       </kendo-tilelayout-item>
 
-</div>
+</div> -->
 
-<div><kendo-tilelayout-item  [col]="1" colSpan="10">
-  <kendo-tilelayout-item-body>
+<!-- <div><kendo-tilelayout-item  [col]="1" colSpan="10">
+  <kendo-tilelayout-item-body> -->
     <!-- <i2v-heatmap-chart heading="Traffic / violation density by" [customFilters]="customFilter"
       (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
       [chartData]="HeatMapData" [color]="'#0286cd'">
     </i2v-heatmap-chart> -->
-  </kendo-tilelayout-item-body>
-</kendo-tilelayout-item></div>
+  <!-- </kendo-tilelayout-item-body>
+</kendo-tilelayout-item></div> -->
 
     <!-- vehicles at tolls -->
-    <div style="width: 100%; display:flex;flex-direction: row;gap:20px">
+    <!-- <div style="width: 100%; display:flex;flex-direction: row;gap:20px">
       <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
         <kendo-tilelayout-item-body>
           <i2v-line-chart heading="Vehicles at tolls" subHeading="in lakhs" [customFilters]="customFilter"
@@ -114,9 +110,9 @@
            [chartData]="LineData">
           </i2v-line-chart>
         </kendo-tilelayout-item-body>
-      </kendo-tilelayout-item>
+      </kendo-tilelayout-item> -->
       <!-- Average speed of vehicle -->
-      <kendo-tilelayout-item  [col]="1" colSpan="10"style="width: 50%">
+      <!-- <kendo-tilelayout-item  [col]="1" colSpan="10"style="width: 50%">
         <kendo-tilelayout-item-body>
           <i2v-line-chart heading="Average speed of vehicle" subHeading="in lakhs" [customFilters]="customFilter"
             (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
@@ -124,11 +120,11 @@
           </i2v-line-chart>
         </kendo-tilelayout-item-body>
       </kendo-tilelayout-item>
-    </div>
+    </div> -->
 
 
 
-<div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
+<!-- <div  style="width: 100%; display:flex;flex-direction: row;gap:20px">
   <kendo-tilelayout-item  [col]="1" colSpan="10" style="width: 50%">
     <kendo-tilelayout-item-body>
       <i2v-area-chart heading="Wrong way vehicles" subHeading="in lakhs" [customFilters]="customFilter"
@@ -147,20 +143,20 @@
     </kendo-tilelayout-item-body>
   </kendo-tilelayout-item>
 
-</div>
+</div> -->
 <div>
   <!-- Vehicle color by its type -->
-  <kendo-tilelayout-item [col]="1" colSpan="10">
+  <!-- <kendo-tilelayout-item [col]="1" colSpan="10">
     <kendo-tilelayout-item-body>
       <i2v-stackedcolumn-chart heading="Vehicle color by its type" subHeading="in lakhs" [customFilters]="customFilter"
         (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
         [chartData]="vehicleColorByType">
       </i2v-stackedcolumn-chart>
     </kendo-tilelayout-item-body>
-  </kendo-tilelayout-item>
+  </kendo-tilelayout-item> -->
 </div>
 <div>
-  <kendo-tilelayout-item reorderable="true" style="width: 100%">
+  <!-- <kendo-tilelayout-item reorderable="true" style="width: 100%">
     <kendo-tilelayout-item-body style="width: 100%">
       <i2v-column-chart
         heading="Vehicle makes"
@@ -174,11 +170,11 @@
       >
       </i2v-column-chart>
     </kendo-tilelayout-item-body>
-  </kendo-tilelayout-item>
+  </kendo-tilelayout-item> -->
 </div>
 <div>
   <!-- Vehicle models -->
-  <kendo-tilelayout-item reorderable="true" style="width: 100%">
+  <!-- <kendo-tilelayout-item reorderable="true" style="width: 100%">
     <kendo-tilelayout-item-body style="width: 100%">
       <i2v-column-chart
         heading="Vehicle models"
@@ -195,6 +191,6 @@
   </kendo-tilelayout-item>
 </div>
 
-    </kendo-tilelayout>
+    </kendo-tilelayout> -->
 </div>
-</div>
+<!-- </div> -->

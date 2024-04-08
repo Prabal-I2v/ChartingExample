@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ICustomFilter } from 'src/app/ChartingLib/chartinglib/i2v-charts/i2v-charts.component';
 import { images } from 'src/app/ChartingLib/chartinglib/kendo-chart/images';
 import { SVGIcon, filePdfIcon, fileExcelIcon } from "@progress/kendo-svg-icons"
-import { grid_employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/emplye';
+// import { grid_employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/emplye';
+import { employees } from 'src/app/ChartingLib/chartinglib/kendo-chart/employees';
 
 @Component({
   selector: 'app-frs',
