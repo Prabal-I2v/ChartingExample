@@ -46,7 +46,7 @@ export class VidsComponent {
   };
 
 
-  ModelMadeByServer : ClientChartModel;
+  ModelMadeByServer: ClientChartModel;
 
 
   onDaysFilterOutput(event) {
@@ -55,6 +55,61 @@ export class VidsComponent {
 
   onCustomFilterOutput(event) {
     console.log("Filter value : ", event);
+  }
+
+  stoppedVehiclesQueryModelCall() {
+    //for Stopped Vehicles Queries
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+    widgetRequestModel.entity = Enum_Entity.Vehicle_Stopped
+    widgetRequestModel.schemaName = Enum_Schema.Events
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        {
+          "field": "EventName",
+          "operator": "Equal",
+          "value": "Vehicle_Stopped",
+          "type": PropertyType.String
+        },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+      widgetRequestModel.joinableEntities = [
+        {
+          entity: Enum_Entity.VideoSources,
+          joinOn: "Id",
+          joinWith: 'VideoSourceId',
+          schema: Enum_Schema.Public,
+          properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+        }
+      ]
+    widgetRequestModel.fieldName = {}
+    widgetRequestModel.showableProperties = ["count"],
+      widgetRequestModel.showablePropertiesLabel = ["VideoSourceName"]
+    widgetRequestModel.groupBy1 = "VideoSourceId"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = true
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.ClubbingTime = true
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
+      console.log(data)
+      this.ModelMadeByServer = data
+    });
   }
 
   HighwayATCCCall() {
@@ -79,22 +134,16 @@ export class VidsComponent {
       "condition": "and"
 
     },
-    widgetRequestModel.fieldName = {"bus" : PropertyType.Number, "truck" : PropertyType.Number, "motorbike" : PropertyType.Number, "car" : PropertyType.Number, "bicycle" : PropertyType.Number}
-    widgetRequestModel.joinableEntities=[
-      {
-        entity : Enum_Entity.VideoSources,
-        joinOn : "Id",
-        joinWith : 'VideoSourceId',
-        schema: Enum_Schema.Public,
-        properties : [{name : "Name", DisplayName : "VideoSourceName"}]
-      }
+      widgetRequestModel.fieldName = { "bus": PropertyType.Number, "truck": PropertyType.Number, "motorbike": PropertyType.Number, "car": PropertyType.Number, "bicycle": PropertyType.Number }
+    widgetRequestModel.joinableEntities = [
+     
     ],
-    widgetRequestModel.groupBy1PropertyName = "",
-    widgetRequestModel.groupBy2PropertyName = "",
+      widgetRequestModel.showableProperties = ["bus", "truck", "motorbike", "car", "bicycle"],
+      widgetRequestModel.showablePropertiesLabel = ["month"]
     widgetRequestModel.groupBy1 = "month",
-    widgetRequestModel.groupByOneIsTime = true,
-    widgetRequestModel.groupBy2 = "",
-    widgetRequestModel.groupByTwoIsTime = false
+      widgetRequestModel.groupByOneIsTime = true,
+      widgetRequestModel.groupBy2 = "",
+      widgetRequestModel.groupByTwoIsTime = false
     widgetRequestModel.isDistinct = true
     widgetRequestModel.ClubbingFieldName = "Total"
     widgetRequestModel.ClubbingTime = true
@@ -103,150 +152,94 @@ export class VidsComponent {
     widgetRequestModel.pageLimit = 0
     widgetRequestModel.identifierFieldName = ""
     widgetRequestModel.multiplicationFactor = 0
-  //   widgetRequestModel.propertyFilters = {
-  //     "rules": [],
-  //     "ruleSet": [
-  //         {
-  //             "rules": [
-  //                 {
-  //                     "field": "Truck",
-  //                     "operator": "NotEqual",
-  //                     "value": "DASModule"
-  //                 },
-  //                 {
-  //                     "field": "EventName",
-  //                     "operator": "Equal",
-  //                     "value": "Highway_ATCC"
-  //                 }
-  //             ],
-  //             "ruleset": [],
-  //             "condition": "and"
-  //         }
-  //     ],
-  //     "condition": "and"
-  // },
+    //   widgetRequestModel.propertyFilters = {
+    //     "rules": [],
+    //     "ruleSet": [
+    //         {
+    //             "rules": [
+    //                 {
+    //                     "field": "Truck",
+    //                     "operator": "NotEqual",
+    //                     "value": "DASModule"
+    //                 },
+    //                 {
+    //                     "field": "EventName",
+    //                     "operator": "Equal",
+    //                     "value": "Highway_ATCC"
+    //                 }
+    //             ],
+    //             "ruleset": [],
+    //             "condition": "and"
+    //         }
+    //     ],
+    //     "condition": "and"
+    // },
     widgetRequestModel.refreshInterval = 1
 
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
       this.ModelMadeByServer = data
     });
   }
 
-  stoppedVehiclesQueryModelCall(){
-  //for Stopped Vehicles Queries
-  var widgetRequestModel = new WidgetRequestModel();
-  widgetRequestModel.id = 1;
-  widgetRequestModel.startTime = 1680118561
-  widgetRequestModel.endTime = 1711597647
-  widgetRequestModel.widgetType = Enum_WidgetType.PieChart
-  widgetRequestModel.entity = Enum_Entity.Vehicle_Stopped
-  widgetRequestModel.schemaName = Enum_Schema.Events
-  widgetRequestModel.method = Enum_Method.Count
-  widgetRequestModel.baseFilter = {
-    "rules": [
-      {
-        "field": "EventName",
-        "operator": "Equal",
-        "value": "Vehicle_Stopped",
-        "type": PropertyType.String
-      },
-    ],
-    "ruleSet": [],
-    "condition": "and"
+ 
 
-  },
-  widgetRequestModel.joinableEntities=[
-    {
-      entity : Enum_Entity.VideoSources,
-      joinOn : "Id",
-      joinWith : 'VideoSourceId',
-      schema: Enum_Schema.Public,
-      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
-    }
-  ]
-  widgetRequestModel.fieldName = {}
-  widgetRequestModel.groupBy1 = "VideoSourceId"
-  widgetRequestModel.groupBy1PropertyName = "VideoSourceName"
-  widgetRequestModel.groupByOneIsTime = false
-  widgetRequestModel.groupBy2 = ""
-  widgetRequestModel.groupByTwoIsTime = false
-  widgetRequestModel.groupBy2PropertyName = ""
-  widgetRequestModel.isDistinct = true
-  widgetRequestModel.ClubbingFieldName = ""
-  widgetRequestModel.pagination = false
-  widgetRequestModel.pageNumber = 0
-  widgetRequestModel.ClubbingTime = true
-  widgetRequestModel.pageLimit = 0
-  widgetRequestModel.identifierFieldName = ""
-  widgetRequestModel.multiplicationFactor = 0
-  widgetRequestModel.refreshInterval = 1
-
-  this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) =>{
-    console.log(data)
-    this.ModelMadeByServer = data
-  });
-  }
-
-  ANPRCall(){
+  ANPRCall() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
       "rules": [
-        {
-          "field": "EventName",
-          "operator": "Equal",
-          "value": "Vehicles_Stopped",
-          "type": PropertyType.String
-        },
+        
       ],
       "ruleSet": [],
       "condition": "and"
 
-},
-widgetRequestModel.fieldName = {"trippleRiding" : PropertyType.Boolean}
-widgetRequestModel.joinableEntities=[
-  {
-    entity : Enum_Entity.VideoSources,
-    joinOn : "Id",
-    joinWith : 'VideoSourceId',
-    schema: Enum_Schema.Public,
-    properties : [{name : "Name", DisplayName : "VideoSourceName"}]
-  }
-],
-widgetRequestModel.groupBy1PropertyName = "VideoSourceName",
-widgetRequestModel.groupBy2PropertyName = "",
-widgetRequestModel.groupBy1 = "VideoSourceId"
-widgetRequestModel.groupByOneIsTime = false
-widgetRequestModel.groupBy2 = ""
-widgetRequestModel.groupByTwoIsTime = false
-widgetRequestModel.isDistinct = false
-widgetRequestModel.ClubbingFieldName = ""
-widgetRequestModel.pagination = false
-widgetRequestModel.pageNumber = 0
-widgetRequestModel.pageLimit = 0
-widgetRequestModel.identifierFieldName = ""
-widgetRequestModel.multiplicationFactor = 0
-widgetRequestModel.propertyFilters = {
+    },
+      widgetRequestModel.fieldName = { "trippleRiding": PropertyType.Boolean }
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties = ["trippleridingcount"]
+    widgetRequestModel.showablePropertiesLabel = ["VideoSourceName"]
+      widgetRequestModel.groupBy1 = "VideoSourceId"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.propertyFilters = {
       "rules": [{
         "field": "trippleRiding",
         "operator": "Equal",
         "value": "true",
-        "type" : PropertyType.Boolean
-    }],
+        "type": PropertyType.Boolean
+      }],
       "ruleSet": [],
       "condition": "and"
-  },
-    widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data));
+    },
+      widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+      this.ModelMadeByServer = data;
+    });
   }
 
-  WrongWayCall(){
+  WrongWayCall() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680620828
@@ -268,18 +261,18 @@ widgetRequestModel.propertyFilters = {
       "condition": "and"
 
     },
-    widgetRequestModel.joinableEntities=[
-      {
-        entity : Enum_Entity.VideoSources,
-        joinOn : "Id",
-        joinWith : 'VideoSourceId',
-        schema: Enum_Schema.Public,
-        properties : [{name : "Name", DisplayName : "VideoSourceName"}]
-      }
-    ],
-    widgetRequestModel.groupBy1PropertyName = "",
-    widgetRequestModel.groupBy2PropertyName = "",
-    widgetRequestModel.fieldName = {}
+      widgetRequestModel.joinableEntities = [
+        {
+          entity: Enum_Entity.VideoSources,
+          joinOn: "Id",
+          joinWith: 'VideoSourceId',
+          schema: Enum_Schema.Public,
+          properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+        }
+      ],
+      widgetRequestModel.showableProperties = ["count"]
+      widgetRequestModel.showablePropertiesLabel = ["month"]
+      widgetRequestModel.fieldName = {}
     widgetRequestModel.groupBy1 = "month"
     widgetRequestModel.groupByOneIsTime = true
     widgetRequestModel.groupBy2 = ""
@@ -294,19 +287,19 @@ widgetRequestModel.propertyFilters = {
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
 
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
-        this.ModelMadeByServer = data
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
+      this.ModelMadeByServer = data
     });
 
   }
 
-  getViolationTypes(){
+  getViolationTypes() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
-    widgetRequestModel.startTime = 1680470793
+    widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.BarChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
@@ -314,7 +307,7 @@ widgetRequestModel.propertyFilters = {
         {
           "field": "EventName",
           "operator": "Equal",
-          "value": "ANPR",
+          "value": "Vehicle_Stopped",
           "type": PropertyType.String
         },
       ],
@@ -322,48 +315,48 @@ widgetRequestModel.propertyFilters = {
       "condition": "and"
 
     },
-    widgetRequestModel.fieldName = {"redLightViolated" : PropertyType.Boolean,"trippleRiding":PropertyType.Boolean,"noHelmet":PropertyType.Boolean,"speedViolated":PropertyType.Boolean}
+      widgetRequestModel.fieldName = { "redLightViolated": PropertyType.Boolean, "trippleRiding": PropertyType.Boolean, "noHelmet": PropertyType.Boolean, "speedViolated": PropertyType.Boolean }
     widgetRequestModel.propertyFilters = {
       "rules": [{
         "field": "redLightViolated",
         "operator": "Equal",
         "value": "true",
-        "type" : PropertyType.Boolean
-    },
-    {
-      "field": "trippleRiding",
-      "operator": "Equal",
-      "value": "true",
-      "type" : PropertyType.Boolean
-  },
-  {
-    "field": "noHelmet",
-    "operator": "Equal",
-    "value": "true",
-    "type" : PropertyType.Boolean
-},
-{
-  "field": "speedViolated",
-  "operator": "Equal",
-  "value": "true",
-  "type" : PropertyType.Boolean
-},
-  ],
+        "type": PropertyType.Boolean
+      },
+      {
+        "field": "trippleRiding",
+        "operator": "Equal",
+        "value": "true",
+        "type": PropertyType.Boolean
+      },
+      {
+        "field": "noHelmet",
+        "operator": "Equal",
+        "value": "true",
+        "type": PropertyType.Boolean
+      },
+      {
+        "field": "speedViolated",
+        "operator": "Equal",
+        "value": "true",
+        "type": PropertyType.Boolean
+      },
+      ],
       "ruleSet": [],
       "condition": "and"
-  }
-  widgetRequestModel.joinableEntities=[
-    {
-      entity : Enum_Entity.VideoSources,
-      joinOn : "Id",
-      joinWith : 'VideoSourceId',
-      schema: Enum_Schema.Public,
-      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
     }
-  ],
-  widgetRequestModel.groupBy1PropertyName = "VideoSourceName",
-  widgetRequestModel.groupBy2PropertyName = "",
-    widgetRequestModel.groupBy1 = "VideoSourceId"
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties = ["redLightViolated", "trippleRiding", "noHelmet",  "speedViolated"]
+    widgetRequestModel.showablePropertiesLabel = ["VideoSourceName"]
+      widgetRequestModel.groupBy1 = "VideoSourceId"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
     widgetRequestModel.groupByTwoIsTime = false
@@ -375,20 +368,19 @@ widgetRequestModel.propertyFilters = {
     widgetRequestModel.identifierFieldName = ""
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
-    //  this.pieChartData=  this.chartingDataService.tranformData( data);
-    this.ModelMadeByServer = data
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
+      //  this.pieChartData=  this.chartingDataService.tranformData( data);
+      this.ModelMadeByServer = data
     });
   }
 
-  TotalNoOfVehicles()
-  {
+  TotalNoOfVehicles() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
@@ -403,51 +395,50 @@ widgetRequestModel.propertyFilters = {
       "ruleSet": [],
       "condition": "and"
 
-},
-widgetRequestModel.fieldName = {}
-widgetRequestModel.joinableEntities=[
-  {
-    entity : Enum_Entity.VideoSources,
-    joinOn : "Id",
-    joinWith : 'VideoSourceId',
-    schema: Enum_Schema.Public,
-    properties : [{name : "Name", DisplayName : "VideoSourceName"}]
-  }
-],
-widgetRequestModel.groupBy1PropertyName = "",
-widgetRequestModel.groupBy2PropertyName = "",
-widgetRequestModel.groupBy1 = "month"
-widgetRequestModel.groupByOneIsTime = true
-widgetRequestModel.groupBy2 = ""
-widgetRequestModel.groupByTwoIsTime = false
-widgetRequestModel.isDistinct = false
-widgetRequestModel.ClubbingFieldName = ""
-widgetRequestModel.ClubbingTime = true
-widgetRequestModel.pagination = false
-widgetRequestModel.pageNumber = 0
-widgetRequestModel.pageLimit = 0
-widgetRequestModel.identifierFieldName = ""
-widgetRequestModel.multiplicationFactor = 0
-widgetRequestModel.propertyFilters = {
+    },
+      widgetRequestModel.fieldName = {}
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties = []
+    widgetRequestModel.showablePropertiesLabel = ["month"]
+    widgetRequestModel.groupBy1 = "month"
+    widgetRequestModel.groupByOneIsTime = true
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.ClubbingTime = true
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.propertyFilters = {
       "rules": [],
       "ruleSet": [],
       "condition": "and"
-  },
-    widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    },
+      widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
       this.ModelMadeByServer = data
     });
 
   }
 
-  VehiclesTypes()
-  {
+  VehiclesTypes() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
@@ -462,50 +453,50 @@ widgetRequestModel.propertyFilters = {
       "ruleSet": [],
       "condition": "and"
 
-},
-widgetRequestModel.fieldName = {}
-widgetRequestModel.joinableEntities=[
-  {
-    entity : Enum_Entity.VideoSources,
-    joinOn : "Id",
-    joinWith : 'VideoSourceId',
-    schema: Enum_Schema.Public,
-    properties : [{name : "Name", DisplayName : "VideoSourceName"}]
-  }
-],
-widgetRequestModel.groupBy1PropertyName = "",
-widgetRequestModel.groupBy2PropertyName = "",
-widgetRequestModel.groupBy1 = "Category"
-widgetRequestModel.groupByOneIsTime = false
-widgetRequestModel.groupBy2 = ""
-widgetRequestModel.groupByTwoIsTime = false
-widgetRequestModel.isDistinct = false
-widgetRequestModel.ClubbingFieldName = ""
-widgetRequestModel.ClubbingTime = true
-widgetRequestModel.pagination = false
-widgetRequestModel.pageNumber = 0
-widgetRequestModel.pageLimit = 0
-widgetRequestModel.identifierFieldName = ""
-widgetRequestModel.multiplicationFactor = 0
-widgetRequestModel.propertyFilters = {
+    },
+      widgetRequestModel.fieldName = {}
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties = []
+    widgetRequestModel.showablePropertiesLabel = ["Category"]
+      widgetRequestModel.groupBy1 = "Category"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.ClubbingTime = true
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.propertyFilters = {
       "rules": [],
       "ruleSet": [],
       "condition": "and"
-  },
-    widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    },
+      widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
       this.ModelMadeByServer = data
     });
 
   }
 
-  getTotalViolationTypes(){
+  getTotalViolationTypes() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.BarChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
@@ -513,7 +504,7 @@ widgetRequestModel.propertyFilters = {
         {
           "field": "EventName",
           "operator": "Equal",
-          "value": "ANPR",
+          "value": "Vehicle_Stopped",
           "type": PropertyType.String
         },
       ],
@@ -521,47 +512,47 @@ widgetRequestModel.propertyFilters = {
       "condition": "and"
 
     },
-    widgetRequestModel.fieldName = {"redLightViolated" : PropertyType.Boolean,"trippleRiding":PropertyType.Boolean,"noHelmet":PropertyType.Boolean,"speedViolated":PropertyType.Boolean}
+      widgetRequestModel.fieldName = { "redLightViolated": PropertyType.Boolean, "trippleRiding": PropertyType.Boolean, "noHelmet": PropertyType.Boolean, "speedViolated": PropertyType.Boolean }
     widgetRequestModel.propertyFilters = {
       "rules": [{
         "field": "redLightViolated",
         "operator": "Equal",
         "value": "true",
-        "type" : PropertyType.Boolean
-    },
-    {
-      "field": "trippleRiding",
-      "operator": "Equal",
-      "value": "true",
-      "type" : PropertyType.Boolean
-  },
-  {
-    "field": "noHelmet",
-    "operator": "Equal",
-    "value": "true",
-    "type" : PropertyType.Boolean
-},
-{
-  "field": "speedViolated",
-  "operator": "Equal",
-  "value": "true",
-  "type" : PropertyType.Boolean
-},
-  ],
+        "type": PropertyType.Boolean
+      },
+      {
+        "field": "trippleRiding",
+        "operator": "Equal",
+        "value": "true",
+        "type": PropertyType.Boolean
+      },
+      {
+        "field": "noHelmet",
+        "operator": "Equal",
+        "value": "true",
+        "type": PropertyType.Boolean
+      },
+      {
+        "field": "speedViolated",
+        "operator": "Equal",
+        "value": "true",
+        "type": PropertyType.Boolean
+      },
+      ],
       "ruleSet": [],
       "condition": "and"
-  }
-  widgetRequestModel.joinableEntities=[
-    {
-      entity : Enum_Entity.VideoSources,
-      joinOn : "Id",
-      joinWith : 'VideoSourceId',
-      schema: Enum_Schema.Public,
-      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
     }
-  ],
-  widgetRequestModel.groupBy1PropertyName = "VideoSourceName",
-  widgetRequestModel.groupBy2PropertyName = "",
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties= ["Total"]
+      widgetRequestModel.showablePropertiesLabel = ["VideoSourceName"]
     widgetRequestModel.groupBy1 = "VideoSourceId"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
@@ -574,17 +565,17 @@ widgetRequestModel.propertyFilters = {
     widgetRequestModel.identifierFieldName = ""
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
       this.ModelMadeByServer = data
     });
   }
-  getVehicleByColor(){
+  getVehicleByColor() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.BarChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
@@ -600,23 +591,23 @@ widgetRequestModel.propertyFilters = {
       "condition": "and"
 
     },
-    widgetRequestModel.fieldName = {"Category" : PropertyType.String}
+      widgetRequestModel.fieldName = { "Category": PropertyType.String }
     widgetRequestModel.propertyFilters = {
       "rules": [],
       "ruleSet": [],
       "condition": "and"
-  }
-  widgetRequestModel.joinableEntities=[
-    {
-      entity : Enum_Entity.VideoSources,
-      joinOn : "Id",
-      joinWith : 'VideoSourceId',
-      schema: Enum_Schema.Public,
-      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
     }
-  ],
-  widgetRequestModel.groupBy1PropertyName = "",
-  widgetRequestModel.groupBy2PropertyName = "",
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties = ["VideoSourceName"]
+    widgetRequestModel.showablePropertiesLabel = ["Category","VehicleColor" ]
     widgetRequestModel.groupBy1 = "Category"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = "VehicleColor"
@@ -629,18 +620,18 @@ widgetRequestModel.propertyFilters = {
     widgetRequestModel.identifierFieldName = ""
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
-    //  this.pieChartData=  this.chartingDataService.tranformData( data);
-    this.ModelMadeByServer = data
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
+      //  this.pieChartData=  this.chartingDataService.tranformData( data);
+      this.ModelMadeByServer = data
     });
   }
-  getVehicleByMake(){
+  getVehicleByMake() {
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.BarChart
-    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.schemaName = Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
@@ -656,23 +647,23 @@ widgetRequestModel.propertyFilters = {
       "condition": "and"
 
     },
-    widgetRequestModel.fieldName = {}
+      widgetRequestModel.fieldName = {}
     widgetRequestModel.propertyFilters = {
       "rules": [],
       "ruleSet": [],
       "condition": "and"
-  }
-  widgetRequestModel.joinableEntities=[
-    {
-      entity : Enum_Entity.VideoSources,
-      joinOn : "Id",
-      joinWith : 'VideoSourceId',
-      schema: Enum_Schema.Public,
-      properties : [{name : "Name", DisplayName : "VideoSourceName"}]
     }
-  ],
-  widgetRequestModel.groupBy1PropertyName = "",
-  widgetRequestModel.groupBy2PropertyName = "",
+    widgetRequestModel.joinableEntities = [
+      {
+        entity: Enum_Entity.VideoSources,
+        joinOn: "Id",
+        joinWith: 'VideoSourceId',
+        schema: Enum_Schema.Public,
+        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      }
+    ],
+    widgetRequestModel.showableProperties = []
+    widgetRequestModel.showablePropertiesLabel = ["vehiclemake" ]
     widgetRequestModel.groupBy1 = "vehiclemake"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
@@ -685,9 +676,9 @@ widgetRequestModel.propertyFilters = {
     widgetRequestModel.identifierFieldName = ""
     widgetRequestModel.multiplicationFactor = 0
     widgetRequestModel.refreshInterval = 1
-    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
-    //  this.pieChartData=  this.chartingDataService.tranformData( data);
-    this.ModelMadeByServer = data
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
+      //  this.pieChartData=  this.chartingDataService.tranformData( data);
+      this.ModelMadeByServer = data
     });
   }
 }

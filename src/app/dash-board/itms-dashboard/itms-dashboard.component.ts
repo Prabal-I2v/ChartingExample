@@ -118,8 +118,7 @@ VehicleTypes: ClientChartModel;
     //   properties : [{name : "Name", DisplayName : "VideoSourceName"}]
     // }
   ],
-  widgetRequestModel.groupBy1PropertyName = "",
-  widgetRequestModel.groupBy2PropertyName = "",
+
     widgetRequestModel.groupBy1 = "month"
     widgetRequestModel.groupByOneIsTime = true
     widgetRequestModel.groupBy2 = ""
@@ -164,8 +163,7 @@ widgetRequestModel.joinableEntities=[
     properties : [{name : "Name", DisplayName : "VideoSourceName"}]
   }
 ],
-widgetRequestModel.groupBy1PropertyName = "",
-widgetRequestModel.groupBy2PropertyName = "",
+
 widgetRequestModel.groupBy1 = "month"
 widgetRequestModel.groupByOneIsTime = true
 widgetRequestModel.groupBy2 = ""
@@ -214,8 +212,7 @@ widgetRequestModel.joinableEntities=[
   //   properties : [{name : "Name", DisplayName : "VideoSourceName"}]
   // }
 ],
-widgetRequestModel.groupBy1PropertyName = "",
-widgetRequestModel.groupBy2PropertyName = "",
+
 widgetRequestModel.groupBy1 = "Category"
 widgetRequestModel.groupByOneIsTime = false
 widgetRequestModel.groupBy2 = ""
