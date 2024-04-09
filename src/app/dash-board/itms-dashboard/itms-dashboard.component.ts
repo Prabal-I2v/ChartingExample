@@ -15,8 +15,10 @@ export class ItmsDashboardComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    // this.TotalNoOfVehicles();
     // this.getTotalViolationTypes();
-    this.getVehicleTypes();
+    // this.getVehicleTypes();
+    this.getViolationTypes();
   }
 //   public barandLineData = [200, 450, 300, 125, 200, 450, 300, 125, 200, 450, 300, 125]
 //   public barandLineCategories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -51,6 +53,7 @@ export class ItmsDashboardComponent implements OnInit {
 TotalVehiclesData : ClientChartModel;
 TotalViolationTypes : ClientChartModel;
 VehicleTypes: ClientChartModel;
+ViolationsType: ClientChartModel;
   customFilter: ICustomFilter = {
     "Area": ["Gurgaon", "Delhi", "Mumbai"],
     "Camera": ["Device 1", "Device 2", "Device 3", "Device 4"],
@@ -63,12 +66,13 @@ VehicleTypes: ClientChartModel;
 
   }
 
+  //chart Data Functions
   getTotalViolationTypes(){
     var widgetRequestModel = new WidgetRequestModel();
     widgetRequestModel.id = 1;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
-    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.widgetType = Enum_WidgetType.ColumnChart
     widgetRequestModel.schemaName=Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
@@ -119,7 +123,7 @@ VehicleTypes: ClientChartModel;
     // }
   ],
 
-    widgetRequestModel.groupBy1 = "month"
+    widgetRequestModel.groupBy1 = "week"
     widgetRequestModel.groupByOneIsTime = true
     widgetRequestModel.groupBy2 = ""
     widgetRequestModel.groupByTwoIsTime = false
@@ -138,10 +142,10 @@ VehicleTypes: ClientChartModel;
   TotalNoOfVehicles()
   {
     var widgetRequestModel = new WidgetRequestModel();
-    widgetRequestModel.id = 1;
+    widgetRequestModel.id = 2;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
-    widgetRequestModel.widgetType = Enum_WidgetType.PieChart
+    widgetRequestModel.widgetType = Enum_WidgetType.ColumnChart
     widgetRequestModel.schemaName=Enum_Schema.Events
     widgetRequestModel.entity = Enum_Entity.ANPR
     widgetRequestModel.method = Enum_Method.Count
@@ -189,7 +193,7 @@ widgetRequestModel.propertyFilters = {
   }
   getVehicleTypes(){
     var widgetRequestModel = new WidgetRequestModel();
-    widgetRequestModel.id = 1;
+    widgetRequestModel.id = 3;
     widgetRequestModel.startTime = 1680118561
     widgetRequestModel.endTime = 1711597647
     widgetRequestModel.widgetType = Enum_WidgetType.PieChart,
@@ -235,6 +239,81 @@ widgetRequestModel.propertyFilters = {
       this.VehicleTypes = data
     });
 
+  }
+  getViolationTypes(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 4;
+    widgetRequestModel.startTime = 1680470793
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.schemaName=Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+    widgetRequestModel.fieldName = {"redLightViolated" : PropertyType.Boolean,"trippleRiding":PropertyType.Boolean,"noHelmet":PropertyType.Boolean,"speedViolated":PropertyType.Boolean}
+    widgetRequestModel.propertyFilters = {
+      "rules": [{
+        "field": "redLightViolated",
+        "operator": "Equal",
+        "value": "true",
+        "type" : PropertyType.Boolean
+    },
+    {
+      "field": "trippleRiding",
+      "operator": "Equal",
+      "value": "true",
+      "type" : PropertyType.Boolean
+  },
+  {
+    "field": "noHelmet",
+    "operator": "Equal",
+    "value": "true",
+    "type" : PropertyType.Boolean
+},
+{
+  "field": "speedViolated",
+  "operator": "Equal",
+  "value": "true",
+  "type" : PropertyType.Boolean
+},
+  ],
+      "ruleSet": [],
+      "condition": "and"
+  }
+  widgetRequestModel.joinableEntities=[
+    // {
+    //   entity : Enum_Entity.VideoSources,
+    //   joinOn : "Id",
+    //   joinWith : 'VideoSourceId',
+    //   schema: Enum_Schema.Public,
+    //   properties : [{name : "Name", DisplayName : "VideoSourceName"}]
+    // }
+  ],
+  // widgetRequestModel.groupBy1PropertyName = "",
+  // widgetRequestModel.groupBy2PropertyName = "",
+    widgetRequestModel.groupBy1 = ""
+    widgetRequestModel.showableProperties=["redlightviolatedcount","trippleridingcount","nohelmetcount","speedviolatedcount"]
+    widgetRequestModel.showablePropertiesLabel=[]
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data)=>{
+    //  this.pieChartData=  this.chartingDataService.tranformData( data);
+    this.ViolationsType = data
+    });
   }
 
 
