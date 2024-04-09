@@ -262,13 +262,7 @@ export class VidsComponent {
 
     },
       widgetRequestModel.joinableEntities = [
-        {
-          entity: Enum_Entity.VideoSources,
-          joinOn: "Id",
-          joinWith: 'VideoSourceId',
-          schema: Enum_Schema.Public,
-          properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
-        }
+       
       ],
       widgetRequestModel.showableProperties = ["count"]
       widgetRequestModel.showablePropertiesLabel = ["month"]
@@ -598,19 +592,14 @@ export class VidsComponent {
       "condition": "and"
     }
     widgetRequestModel.joinableEntities = [
-      {
-        entity: Enum_Entity.VideoSources,
-        joinOn: "Id",
-        joinWith: 'VideoSourceId',
-        schema: Enum_Schema.Public,
-        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
-      }
+      
     ],
-    widgetRequestModel.showableProperties = ["VideoSourceName"]
-    widgetRequestModel.showablePropertiesLabel = ["Category","VehicleColor" ]
-    widgetRequestModel.groupBy1 = "Category"
+    widgetRequestModel.showableProperties = [ "category"]
+    widgetRequestModel.showablePropertiesLabel = ["VehicleColor" ]
+    widgetRequestModel.groupBy1 = "VehicleColor"
     widgetRequestModel.groupByOneIsTime = false
-    widgetRequestModel.groupBy2 = "VehicleColor"
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.MultiValuedColumn = true
     widgetRequestModel.groupByTwoIsTime = false
     widgetRequestModel.isDistinct = false
     widgetRequestModel.ClubbingFieldName = ""

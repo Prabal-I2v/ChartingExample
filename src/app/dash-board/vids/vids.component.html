@@ -22,6 +22,16 @@
       </kendo-tilelayout-item-body>
     </kendo-tilelayout-item>
 
+    <kendo-tilelayout-item title="Stacked COlumn Chart" [col]="1" colSpan="10">
+      <kendo-tilelayout-item-body>
+
+        <i2v-stackedcolumn-chart heading="Vehicle By Color" subHeading="in lakhs" [customFilters]="customFilter"
+          (daysFilterOutput)="onDaysFilterOutput($event)" (customFilterOutput)="onCustomFilterOutput($event)"
+          [chartData]="ModelMadeByServer">
+        </i2v-stackedcolumn-chart>
+      </kendo-tilelayout-item-body>
+    </kendo-tilelayout-item>
+
 
     <!-- <kendo-tilelayout-item title="Pie Chart" [col]="1" colSpan="10">
       <kendo-tilelayout-item-body>
