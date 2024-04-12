@@ -123,12 +123,7 @@ export class VidsComponent {
     widgetRequestModel.method = Enum_Method.Sum
     widgetRequestModel.baseFilter = {
       "rules": [
-        {
-          "field": "EventName",
-          "operator": "Equal",
-          "value": "Highway_ATCC",
-          "type": PropertyType.String
-        },
+
       ],
       "ruleSet": [],
       "condition": "and"
@@ -136,7 +131,7 @@ export class VidsComponent {
     },
       widgetRequestModel.fieldName = { "bus": PropertyType.Number, "truck": PropertyType.Number, "motorbike": PropertyType.Number, "car": PropertyType.Number, "bicycle": PropertyType.Number }
     widgetRequestModel.joinableEntities = [
-     
+
     ],
       widgetRequestModel.showableProperties = ["bus", "truck", "motorbike", "car", "bicycle"],
       widgetRequestModel.showablePropertiesLabel = ["month"]
@@ -181,7 +176,7 @@ export class VidsComponent {
     });
   }
 
- 
+
 
   ANPRCall() {
     var widgetRequestModel = new WidgetRequestModel();
@@ -194,7 +189,7 @@ export class VidsComponent {
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
       "rules": [
-        
+
       ],
       "ruleSet": [],
       "condition": "and"
@@ -262,7 +257,7 @@ export class VidsComponent {
 
     },
       widgetRequestModel.joinableEntities = [
-       
+
       ],
       widgetRequestModel.showableProperties = ["count"]
       widgetRequestModel.showablePropertiesLabel = ["month"]
@@ -298,12 +293,12 @@ export class VidsComponent {
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
       "rules": [
-        {
-          "field": "EventName",
-          "operator": "Equal",
-          "value": "Vehicle_Stopped",
-          "type": PropertyType.String
-        },
+        // {
+        //   "field": "EventName",
+        //   "operator": "Equal",
+        //   "value": "Vehicle_Stopped",
+        //   "type": PropertyType.String
+        // },
       ],
       "ruleSet": [],
       "condition": "and"
@@ -495,12 +490,12 @@ export class VidsComponent {
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
       "rules": [
-        {
-          "field": "EventName",
-          "operator": "Equal",
-          "value": "Vehicle_Stopped",
-          "type": PropertyType.String
-        },
+        // {
+        //   "field": "EventName",
+        //   "operator": "Equal",
+        //   "value": "Vehicle_Stopped",
+        //   "type": PropertyType.String
+        // },
       ],
       "ruleSet": [],
       "condition": "and"
@@ -537,17 +532,17 @@ export class VidsComponent {
       "condition": "and"
     }
     widgetRequestModel.joinableEntities = [
-      {
-        entity: Enum_Entity.VideoSources,
-        joinOn: "Id",
-        joinWith: 'VideoSourceId',
-        schema: Enum_Schema.Public,
-        properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
-      }
+      // {
+      //   entity: Enum_Entity.VideoSources,
+      //   joinOn: "Id",
+      //   joinWith: 'VideoSourceId',
+      //   schema: Enum_Schema.Public,
+      //   properties: [{ name: "Name", DisplayName: "VideoSourceName" }]
+      // }
     ],
     widgetRequestModel.showableProperties= ["Total"]
-      widgetRequestModel.showablePropertiesLabel = ["VideoSourceName"]
-    widgetRequestModel.groupBy1 = "VideoSourceId"
+      widgetRequestModel.showablePropertiesLabel = ["Violations"]
+    widgetRequestModel.groupBy1 = ""
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
     widgetRequestModel.groupByTwoIsTime = false
@@ -574,12 +569,12 @@ export class VidsComponent {
     widgetRequestModel.method = Enum_Method.Count
     widgetRequestModel.baseFilter = {
       "rules": [
-        {
-          "field": "EventName",
-          "operator": "Equal",
-          "value": "Vehicle_Stopped",
-          "type": PropertyType.String
-        },
+        // {
+        //   "field": "EventName",
+        //   "operator": "Equal",
+        //   "value": "Vehicle_Stopped",
+        //   "type": PropertyType.String
+        // },
       ],
       "ruleSet": [],
       "condition": "and"
@@ -592,7 +587,7 @@ export class VidsComponent {
       "condition": "and"
     }
     widgetRequestModel.joinableEntities = [
-      
+
     ],
     widgetRequestModel.showableProperties = [ "category"]
     widgetRequestModel.showablePropertiesLabel = ["VehicleColor" ]
@@ -656,6 +651,57 @@ export class VidsComponent {
     widgetRequestModel.groupBy1 = "vehiclemake"
     widgetRequestModel.groupByOneIsTime = false
     widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.groupByTwoIsTime = false
+    widgetRequestModel.isDistinct = false
+    widgetRequestModel.ClubbingFieldName = ""
+    widgetRequestModel.pagination = false
+    widgetRequestModel.pageNumber = 0
+    widgetRequestModel.pageLimit = 0
+    widgetRequestModel.identifierFieldName = ""
+    widgetRequestModel.multiplicationFactor = 0
+    widgetRequestModel.refreshInterval = 1
+    this.chartingDataService.getChartingData(widgetRequestModel).subscribe((data) => {
+      //  this.pieChartData=  this.chartingDataService.tranformData( data);
+      this.ModelMadeByServer = data
+    });
+  }
+  getTrafficDensity(){
+    var widgetRequestModel = new WidgetRequestModel();
+    widgetRequestModel.id = 1;
+    widgetRequestModel.startTime = 1680118561
+    widgetRequestModel.endTime = 1711597647
+    widgetRequestModel.widgetType = Enum_WidgetType.BarChart
+    widgetRequestModel.schemaName = Enum_Schema.Events
+    widgetRequestModel.entity = Enum_Entity.ANPR
+    widgetRequestModel.method = Enum_Method.Count
+    widgetRequestModel.baseFilter = {
+      "rules": [
+        // {
+        //   "field": "EventName",
+        //   "operator": "Equal",
+        //   "value": "Vehicle_Stopped",
+        //   "type": PropertyType.String
+        // },
+      ],
+      "ruleSet": [],
+      "condition": "and"
+
+    },
+      widgetRequestModel.fieldName = { "Category": PropertyType.String }
+    widgetRequestModel.propertyFilters = {
+      "rules": [],
+      "ruleSet": [],
+      "condition": "and"
+    }
+    widgetRequestModel.joinableEntities = [
+
+    ],
+    widgetRequestModel.showableProperties = [ "category"]
+    widgetRequestModel.showablePropertiesLabel = ["VehicleColor" ]
+    widgetRequestModel.groupBy1 = "VehicleColor"
+    widgetRequestModel.groupByOneIsTime = false
+    widgetRequestModel.groupBy2 = ""
+    widgetRequestModel.MultiValuedColumn = true
     widgetRequestModel.groupByTwoIsTime = false
     widgetRequestModel.isDistinct = false
     widgetRequestModel.ClubbingFieldName = ""
